@@ -5,10 +5,13 @@ Goal-Tracker is a responsive web application to help people accomplish change an
 
 Goal-Tracker's front-end is built with JavaScript and React, and the back end is Rails, Ruby and PostgreSQL.  We used Devise for Authentication and Authorization.
 
-[See the deployed application on Heroku](https://tbd.com/)
+[See the deployed application on Heroku](https://goal-tracker-222.herokuapp.com/)
 
 ## Screen shot
 # ![SCREENSHOT](app/assets/images/screenshot-placeholder.jpeg)
+
+## Preview Demo
+# ![DEMOGIF](https://media.giphy.com/media/3og0IJMLcAXppLkFPi/giphy.gif)
 
 ## Developers
 - Ted Francis
