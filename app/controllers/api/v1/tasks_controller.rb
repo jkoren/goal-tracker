@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+class Api::V1::TasksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:create, :update]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
@@ -6,6 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   def index
     @tasks = Task.all
+    render json: @tasks
   end
 
   # GET /tasks/1
@@ -16,13 +17,14 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
   end
-
+  
   # GET /tasks/1/edit
   def edit
   end
-
+  
   # POST /tasks
   def create
+    binding.pry
     @task = Task.new(task_params)
 
     if @task.save
@@ -55,6 +57,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:id, :title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status)
+      params.require(:task).permit(:id, :task_name, :description, :task_starts_at, :timer_starts_at, :time_worked, :status)
     end
 end

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import TaskFormContainer from './TaskFormContainer'
+import TaskTile from './TaskTile'
 
 const TaskIndexPage = (props) => {
   const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-      fetch()
+      fetch("api/v1/tasks")
       .then(response => {
         if(response.ok){
           return response
@@ -24,7 +25,7 @@ const TaskIndexPage = (props) => {
     }, [])
 
   const addNewTask = (formData) => {
-    fetch(``, {
+    fetch(`api/v1/tasks`, {
       method: 'POST',
       body: JSON.stringify(formData),
       credentials: 'same-origin',
@@ -44,6 +45,7 @@ const TaskIndexPage = (props) => {
     })
     .then(response => response.json())
     .then(body => {
+      debugger
       setTasks([
         ...tasks, 
         body,
@@ -52,16 +54,21 @@ const TaskIndexPage = (props) => {
   .catch(error => console.error(`Error in fetch: ${error.message}`));
 };
 
-  // const taskTiles = tasks.map((task) => {
-  //   return(
-      
-  //   )
-  // })
+  const taskTiles = tasks.map((task) => {
+    return(
+      <TaskTile
+        key={task.id} 
+        id={task.id}
+        name={task.task_name}
+        description={task.description}
+      />
+    )
+  })
 
   return(
     <div>
       <TaskFormContainer addNewTask={addNewTask} />
-        {/* {taskTiles} */}
+        {taskTiles}
     </div>
   )
 }

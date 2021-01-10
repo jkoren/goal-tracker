@@ -15,11 +15,11 @@ const TaskFormContainer = (props) => {
   
   const handleSubmit = event => {
     event.preventDefault();
-      props.addNewTask(newTask);
-      setNewTask({
-        task_name: "",
-        description: ""
-      });
+    props.addNewTask(newTask);
+    setNewTask({
+      task_name: "",
+      description: ""
+    });
     // }
   };
   
