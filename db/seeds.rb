@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# seeds.rb 
+
+colleen = User.create(email: "colleen@gmail.com", password: "testtest")
+barbara = User.create(email: "barbara@gmail.com", password: "testtest")
+matthew = User.create(email: "matthew@gmail.com", password: "testtest")
+
+Task.create(title: "Read orientation materials",task_starts_at: DateTime.now, status: 3, user: matthew)
+Task.create(title: "Read orientation materials",task_starts_at: DateTime.now, status: 3, user: colleen)
+Task.create(title: "Read orientation materials",task_starts_at: DateTime.now, status: 3, user: barbara)
+
+Task.create(title: "Attend office hours",task_starts_at: DateTime.now, status: 2, user: matthew, body: "sample text data explanation")
+Task.create(title: "Attend office hours",task_starts_at: DateTime.now, status: 2, user: matthew)
+Task.create(title: "Develop ER Diagram",task_starts_at: DateTime.now, status: 1, user: matthew)
+Task.create(title: "Create Back End Controller",task_starts_at: DateTime.now, status: 1, user: matthew)
+Task.create(title: "Build Index Page",task_starts_at: DateTime.now, status: 1, user: matthew)
+Task.create(title: "Build Show Page",task_starts_at: DateTime.now, status: 1, user: matthew)
