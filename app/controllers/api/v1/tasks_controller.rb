@@ -11,6 +11,9 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks/1
   def show
+    @task = Task.find(params[:id])
+    render :show
+    
   end
 
   # GET /tasks/new
@@ -30,7 +33,8 @@ class Api::V1::TasksController < ApplicationController
     # binding.pry
 
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      flash[:notice] = 'Task was successfully created.'
+      redirect_to @task
     else
       render :new
     end

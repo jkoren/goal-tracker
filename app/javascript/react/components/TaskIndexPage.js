@@ -57,9 +57,10 @@ const TaskIndexPage = (props) => {
     return(
       <TaskTile
         key={task.id} 
-        id={task.id}
-        title={task.title}
-        body={task.body}
+        data={task}
+        // id={task.id}
+        // title={task.title}
+        // body={task.body}
       />
     )
   })
