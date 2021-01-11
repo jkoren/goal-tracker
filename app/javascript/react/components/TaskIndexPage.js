@@ -45,7 +45,6 @@ const TaskIndexPage = (props) => {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
       setTasks([
         ...tasks, 
         body,
@@ -59,8 +58,8 @@ const TaskIndexPage = (props) => {
       <TaskTile
         key={task.id} 
         id={task.id}
-        name={task.task_name}
-        description={task.description}
+        name={task.title}
+        description={task.body}
       />
     )
   })

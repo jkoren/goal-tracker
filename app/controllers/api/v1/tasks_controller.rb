@@ -24,8 +24,10 @@ class Api::V1::TasksController < ApplicationController
   
   # POST /tasks
   def create
-    binding.pry
     @task = Task.new(task_params)
+    @task.user = current_user
+    @task.task_starts_at = DateTime.now # this is required.  do we want it in the form so that it can be over-written for future tasks?
+    # binding.pry
 
     if @task.save
       redirect_to @task, notice: 'Task was successfully created.'
@@ -57,6 +59,6 @@ class Api::V1::TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:id, :task_name, :description, :task_starts_at, :timer_starts_at, :time_worked, :status)
+      params.permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status)
     end
 end
