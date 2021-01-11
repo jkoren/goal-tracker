@@ -2,8 +2,8 @@ import React, { useState } from "react"
 
 const TaskFormContainer = (props) => {
   const [newTask, setNewTask] = useState({
-    task_name: "",
-    description: ""
+    title: "",
+    body: ""
   });
   
   const handleChange = event => {
@@ -17,8 +17,8 @@ const TaskFormContainer = (props) => {
     event.preventDefault();
     props.addNewTask(newTask);
     setNewTask({
-      task_name: "",
-      description: ""
+      title: "",
+      body: ""
     });
     // }
   };
@@ -28,21 +28,21 @@ const TaskFormContainer = (props) => {
       <label>
         To Do:
         <input
-          name="task_name"
-          id="task_name"
+          name="title"
+          id="title"
           type="text"
           onChange={handleChange}
-          value={newTask.task_name}
+          value={newTask.title}
         />
       </label>
       <label>
         Description:
         <textarea 
-          name="description" 
-          id="description"
+          name="body" 
+          id="body"
           rows="3"
           onChange={handleChange}
-          value={newTask.description}>
+          value={newTask.body}>
         </textarea>
       </label>
       <div>
