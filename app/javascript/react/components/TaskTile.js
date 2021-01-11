@@ -2,9 +2,9 @@ import React from "react"
 
 const TaskTile = (props) =>{
   return(
-    <div>
-      This is the Task Tile
-    </div>
+      <tr>
+        <td>{props.title}</td>
+      </tr>
   )
 }
 

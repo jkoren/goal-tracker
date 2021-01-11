@@ -67,7 +67,30 @@ const TaskIndexPage = (props) => {
   return(
     <div>
       <TaskFormContainer addNewTask={addNewTask} />
-        {taskTiles}
+      <table>
+        <thead>
+          <tr>
+            <th>To Do:</th>
+          </tr>
+        </thead>
+        <tbody>
+          {taskTiles}
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th>In Progress:</th>
+          </tr>
+        </thead>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th>Completed:</th>
+          </tr>
+        </thead>
+      </table>
     </div>
   )
 }
