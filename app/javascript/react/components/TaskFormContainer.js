@@ -53,8 +53,9 @@ const TaskFormContainer = (props) => {
         <input type="datetime-local"    
           id="task_starts_at" 
           name="task_starts_at"
-          required>
-        </input>
+          onChange={handleChange}
+          value={newTask.task_starts_at}
+          />
       </label>
 
       <div>
