@@ -3,7 +3,8 @@ import React, { useState } from "react"
 const TaskFormContainer = (props) => {
   const [newTask, setNewTask] = useState({
     title: "",
-    body: ""
+    body: "",
+    task_starts_at: Date.now()
   });
   
   const handleChange = event => {
@@ -18,7 +19,8 @@ const TaskFormContainer = (props) => {
     props.addNewTask(newTask);
     setNewTask({
       title: "",
-      body: ""
+      body: "",
+      task_starts_at: Date.now()
     });
     // }
   };
@@ -45,6 +47,16 @@ const TaskFormContainer = (props) => {
           value={newTask.body}>
         </textarea>
       </label>
+
+      <label>
+        Starts At:
+        <input type="datetime-local"    
+          id="task_starts_at" 
+          name="task_starts_at"
+          required>
+        </input>
+      </label>
+
       <div>
         <input className="button" type="submit" value="Submit" />
       </div>

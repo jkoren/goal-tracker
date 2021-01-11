@@ -26,7 +26,7 @@ class Api::V1::TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.user = current_user
-    @task.task_starts_at = DateTime.now # this is required.  do we want it in the form so that it can be over-written for future tasks?
+    # @task.task_starts_at = DateTime.now # this is required.  do we want it in the form so that it can be over-written for future tasks?
     # binding.pry
 
     if @task.save
