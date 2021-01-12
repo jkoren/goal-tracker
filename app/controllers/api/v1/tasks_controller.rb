@@ -6,6 +6,7 @@ class Api::V1::TasksController < ApplicationController
   # GET /tasks
   def index
     render json: Task.all.sort_by{ |a| a[:updated_at] }.reverse
+    @tasks = Task.search(params[:search])
   end
 
   # GET /tasks/1
@@ -60,6 +61,6 @@ class Api::V1::TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status)
+      params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :search)
     end
 end

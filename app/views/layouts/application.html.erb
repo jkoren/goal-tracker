@@ -11,6 +11,12 @@
   <nav class="top-bar">
     <h1><a href="/">Goal Tracker</a></h1>
 
+    <h4>Search by Category:</h4>
+      <%= form_tag(tasks_path, method: :get) do %>
+        <%= text_field_tag(:search, params[:search]) %>
+        <%= submit_tag ("Search") %>
+      <% end %>
+
     <section class="top-bar-section">
       <ul class="right">
         <%- if current_user -%>
