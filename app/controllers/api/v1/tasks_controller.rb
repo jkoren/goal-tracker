@@ -41,7 +41,7 @@ class Api::V1::TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to @tasks, notice: 'Task was successfully updated.'
     else
       render :edit
     end
