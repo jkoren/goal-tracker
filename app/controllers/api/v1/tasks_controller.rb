@@ -13,18 +13,9 @@ class Api::V1::TasksController < ApplicationController
   def show
     render json: @task
   end
-  # GET /tasks/new
-  # def new
-  #   @task = Task.new
-  # end
-  
-  # GET /tasks/1/edit
-  # def edit
-  # end
   
   # POST /tasks
   def create
-    binding.pry
     @task = Task.new(task_params)
     @task.user = current_user
     @time_int = task_params["task_starts_at"]
