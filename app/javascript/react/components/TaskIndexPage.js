@@ -66,33 +66,44 @@ const TaskIndexPage = (props) => {
   })
 
   return(
-    <div>
-      <TaskFormContainer addNewTask={addNewTask} />
-      <table>
-        <thead>
-          <tr>
-            <th>To Do:</th>
-          </tr>
-        </thead>
-        <tbody>
-          {taskTiles}
-        </tbody>
-      </table>
-      <table>
-        <thead>
-          <tr>
-            <th>In Progress:</th>
-          </tr>
-        </thead>
-      </table>
-      <table>
-        <thead>
-          <tr>
-            <th>Completed:</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
+    <>
+      <div className="grid-x grid-margin-x">
+        <div className = "medium-offset-1">
+          <div className="medium-3 callout">
+            <TaskFormContainer addNewTask={addNewTask} />
+          </div>
+        </div>
+      </div>
+
+      <div className="grid-x grid-margin-x">
+        <div className="medium-offset-1 medium-6">
+          <table>
+            <thead>
+              <tr>
+                <th>To Do:</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskTiles}
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>In Progress:</th>
+              </tr>
+            </thead>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Completed:</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </>
   )
 }
 

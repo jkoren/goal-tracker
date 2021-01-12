@@ -11,32 +11,30 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks/1
   def show
-    @task = Task.find(params[:id])
-    render :show
-    
+    render json: @task
   end
 
   # GET /tasks/new
-  def new
-    @task = Task.new
-  end
+  # def new
+  #   @task = Task.new
+  # end
   
   # GET /tasks/1/edit
-  def edit
-  end
+  # def edit
+  # end
   
   # POST /tasks
   def create
     @task = Task.new(task_params)
     @task.user = current_user
-    # @task.task_starts_at = DateTime.now # this is required.  do we want it in the form so that it can be over-written for future tasks?
-    # binding.pry
+    @time_int = task_params["task_starts_at"]
+    @task.task_starts_at = DateTime.strptime(@time_int.to_s, "%Q")
 
     if @task.save
       flash[:notice] = 'Task was successfully created.'
-      redirect_to @task
+      render json: @task
     else
-      render :new
+      render json: :new
     end
   end
 
@@ -63,6 +61,6 @@ class Api::V1::TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status)
+      params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status)
     end
 end
