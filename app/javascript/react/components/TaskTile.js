@@ -9,7 +9,7 @@ const TaskTile = (props) =>{
           {props.data.title}
         </Link>
       </td>
-      <td>{props.data.status}</td>
+      <td>{props.data.hashtag}</td>
     </tr>
   )
 }
