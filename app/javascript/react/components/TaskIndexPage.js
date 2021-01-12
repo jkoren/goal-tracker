@@ -65,32 +65,34 @@ const TaskIndexPage = (props) => {
   })
 
   return(
-    <div>
-      <TaskFormContainer addNewTask={addNewTask} />
-      <table>
-        <thead>
-          <tr>
-            <th>To Do:</th>
-          </tr>
-        </thead>
-        <tbody>
-          {taskTiles}
-        </tbody>
-      </table>
-      <table>
-        <thead>
-          <tr>
-            <th>In Progress:</th>
-          </tr>
-        </thead>
-      </table>
-      <table>
-        <thead>
-          <tr>
-            <th>Completed:</th>
-          </tr>
-        </thead>
-      </table>
+    <div className='grid-container'>
+      <div className='show-callout'>
+        <TaskFormContainer addNewTask={addNewTask} />
+        <table className='responsive-card-table-unstripped'>
+          <thead>
+            <tr>
+              <th>To Do:</th>
+            </tr>
+          </thead>
+          <tbody>
+            {taskTiles}
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>In Progress:</th>
+            </tr>
+          </thead>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Completed:</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
   )
 }
