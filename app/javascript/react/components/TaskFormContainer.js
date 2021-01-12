@@ -96,6 +96,15 @@ const TaskFormContainer = (props) => {
           value={newTask.task_starts_at}
           />
       </label>
+      <label>
+        Hashtags:
+        <input type="text"
+          id="hashtag"
+          name="hashtag"
+          onChange={handleChange}
+          value={newTask.hashtag}
+        />
+      </label>
       
       <div>
         <input className="button" type="submit" value="Submit" />

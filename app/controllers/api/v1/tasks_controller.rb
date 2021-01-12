@@ -5,8 +5,8 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
-    render json: @tasks
+    render json: Task.all.sort_by{ |a| a[:updated_at] }.reverse
+    @tasks = Task.search(params[:search])
   end
 
   # GET /tasks/1
@@ -19,7 +19,7 @@ class Api::V1::TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
     @time_int = task_params["task_starts_at"]
-    @task.task_starts_at = DateTime.strptime(@time_int.to_s, "%Q")
+    @task.task_starts_at = @time_int.to_datetime
 
     if @task.save
       flash[:notice] = 'Task was successfully created.'
@@ -52,6 +52,6 @@ class Api::V1::TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status)
+      params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :search)
     end
 end
