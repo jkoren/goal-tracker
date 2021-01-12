@@ -48,6 +48,45 @@ const TaskFormContainer = (props) => {
         </textarea>
       </label>
 
+
+      <label>
+        Status:
+        <div className="radio">
+          <label>
+            <input 
+              type="radio" 
+              value="1" 
+              checked={true} 
+              onChange={handleChange}
+              value={newTask.status}
+            />
+            To do
+          </label>
+        </div>
+        <div className="radio">
+          <label>
+            <input 
+              type="radio" 
+              value="2"
+              onChange={handleChange}
+              value={newTask.status}
+            />
+            Doing
+          </label>
+        </div>
+        <div className="radio">
+          <label>
+            <input 
+              type="radio" 
+              value="3" 
+              onChange={handleChange}
+              value={newTask.status}
+            />
+            Done
+          </label>
+        </div>
+      </label>
+
       <label>
         Starts At:
         <input type="datetime-local"    
@@ -57,7 +96,7 @@ const TaskFormContainer = (props) => {
           value={newTask.task_starts_at}
           />
       </label>
-
+      
       <div>
         <input className="button" type="submit" value="Submit" />
       </div>

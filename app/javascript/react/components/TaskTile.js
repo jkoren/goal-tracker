@@ -2,9 +2,10 @@ import React from "react"
 
 const TaskTile = (props) =>{
   return(
-      <tr>
-        <td>{props.title}</td>
-      </tr>
+      <div className="cell callout">
+        {props.data.title} <br></br>
+        {props.data.status}
+      </div>
   )
 }
 
