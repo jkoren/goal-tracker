@@ -55,13 +55,12 @@ const TaskIndexPage = (props) => {
 
   const taskTiles = tasks.map((task) => {
     return(
-      <TaskTile
-        key={task.id} 
-        data={task}
-        // id={task.id}
-        // title={task.title}
-        // body={task.body}
-      />
+      <div>
+        <TaskTile
+          key={task.id} 
+          data={task}
+        />
+      </div>
     )
   })
 
