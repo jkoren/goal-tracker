@@ -75,7 +75,7 @@ const TaskIndexPage = (props) => {
       </div>
 
       <div className="grid-x grid-margin-x">
-        <div className="medium-offset-1 medium-6">
+        <div className="medium-offset-1 medium-3">
           <table>
             <thead>
               <tr>
