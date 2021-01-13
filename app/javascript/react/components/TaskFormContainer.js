@@ -7,17 +7,23 @@ const TaskFormContainer = (props) => {
     task_starts_at: Date.now(),
     timer_starts_at: Date.now(),
     time_worked: 0,
-    status: 0,
+    status: "To do",
     hashtags: []
   });
   
   const handleChange = event => {
-    debugger // need to work on radio button
     setNewTask({
       ...newTask,
       [event.currentTarget.name]: event.currentTarget.value
     });
   };
+
+  const handleStatusChange = event => {
+    setNewTask({
+      ...newTask,
+      status: parseInt(event.currentTarget.value)
+    });
+  }
   
   const handleSubmit = event => {
     event.preventDefault();
@@ -28,11 +34,11 @@ const TaskFormContainer = (props) => {
       task_starts_at: Date.now(),
       timer_starts_at: Date.now(),
       time_worked: 0,
-      status: 0,
+      status: 1,
       hashtags: []
     });
-    // }
   };
+
   return (
     <form onSubmit={handleSubmit} className="new-task-form callout">
       <div className = "grid-x">
@@ -46,6 +52,7 @@ const TaskFormContainer = (props) => {
               type="text"
               onChange={handleChange}
               value={newTask.title}
+              required
             />
           </label>
           <label>
@@ -67,9 +74,9 @@ const TaskFormContainer = (props) => {
               <label>
                 <input 
                   type="radio" 
-                  value="To Do" 
-                  checked={newTask.status === "To Do"} 
-                  onChange={handleChange}
+                  value="1" 
+                  checked={newTask.status === 1} 
+                  onChange={handleStatusChange}
                 />
                 To do
               </label>
@@ -78,9 +85,9 @@ const TaskFormContainer = (props) => {
               <label>
                 <input 
                   type="radio" 
-                  value="In Progress"
-                  checked={newTask.status === "In Progress"} 
-                  onChange={handleChange}
+                  value="2"
+                  checked={newTask.status === 2} 
+                  onChange={handleStatusChange}
                 />
                 In Progress
               </label>
@@ -89,9 +96,9 @@ const TaskFormContainer = (props) => {
               <label>
                 <input 
                   type="radio" 
-                  value="Completed"
-                  checked={newTask.status === "Completed"}  
-                  onChange={handleChange}
+                  value="3"
+                  checked={newTask.status === 3}  
+                  onChange={handleStatusChange}
                 />
                 Completed
               </label>
@@ -107,6 +114,7 @@ const TaskFormContainer = (props) => {
               name="task_starts_at"
               onChange={handleChange}
               value={newTask.task_starts_at}
+              required
               />
           </label>
           <label>
@@ -118,6 +126,9 @@ const TaskFormContainer = (props) => {
               value={newTask.hashtag}
             />
           </label>
+          {/* <label>
+            Time Since Start: {time_since_start}
+          </label> */}
         </div>
       </div>
       
