@@ -52,7 +52,38 @@ const TaskIndexPage = (props) => {
   })
   .catch(error => console.error(`Error in fetch: ${error.message}`));
 };
-  const taskTiles = tasks.map((task) => {
+  // const taskTiles = tasks.map((task) => {
+  //   return(
+  //     <div>
+  //       <TaskTile
+  //         key={task.id} 
+  //         data={task}
+  //       />
+  //     </div>
+  //   )
+  // })
+
+  const toDoTaskTiles = tasks.filter(task => task.status == "To Do").map((task) => {
+    return(
+      <div>
+        <TaskTile
+          key={task.id} 
+          data={task}
+        />
+      </div>
+    )
+  })
+  const inProgressTaskTiles = tasks.filter(task => task.status == "In Progress").map((task) => {
+    return(
+      <div>
+        <TaskTile
+          key={task.id} 
+          data={task}
+        />
+      </div>
+    )
+  })
+  const completedTaskTiles = tasks.filter(task => task.status == "Completed").map((task) => {
     return(
       <div>
         <TaskTile
@@ -84,7 +115,7 @@ const TaskIndexPage = (props) => {
               </tr>
             </thead>
             <tbody>
-              {taskTiles}
+              {toDoTaskTiles}
             </tbody>
           </table>
         </div>
@@ -96,7 +127,7 @@ const TaskIndexPage = (props) => {
               </tr>
             </thead>
             <tbody>
-              {taskTiles}
+              {inProgressTaskTiles}
             </tbody>
           </table>
         </div>
@@ -108,7 +139,7 @@ const TaskIndexPage = (props) => {
               </tr>
             </thead>
             <tbody>
-              {taskTiles}
+              {completedTaskTiles}
             </tbody>
           </table>
         </div>
