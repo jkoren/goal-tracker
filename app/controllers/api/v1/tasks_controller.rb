@@ -5,9 +5,8 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all.sort_by{ |a| a[:created_at] }.reverse
-    #Ted do we need this line?
-    # @tasks = Task.search(params[:search])
+    @tasks = Task.where(:user => current_user)
+    @tasks = @tasks.sort_by{ |a| a[:created_at] }.reverse
     render json: @tasks, each_serializer: TaskSerializer
   end
 

@@ -12,6 +12,7 @@ const TaskFormContainer = (props) => {
   });
   
   const handleChange = event => {
+    debugger // need to work on radio button
     setNewTask({
       ...newTask,
       [event.currentTarget.name]: event.currentTarget.value
@@ -32,7 +33,6 @@ const TaskFormContainer = (props) => {
     });
     // }
   };
-  
   return (
     <form onSubmit={handleSubmit} className="new-task-form callout">
       <div className = "grid-x">
@@ -67,10 +67,9 @@ const TaskFormContainer = (props) => {
               <label>
                 <input 
                   type="radio" 
-                  value="1" 
-                  checked={true} 
+                  value="To Do" 
+                  checked={newTask.status === "To Do"} 
                   onChange={handleChange}
-                  value={newTask.status}
                 />
                 To do
               </label>
@@ -79,22 +78,22 @@ const TaskFormContainer = (props) => {
               <label>
                 <input 
                   type="radio" 
-                  value="2"
+                  value="In Progress"
+                  checked={newTask.status === "In Progress"} 
                   onChange={handleChange}
-                  value={newTask.status}
                 />
-                Doing
+                In Progress
               </label>
             </div>
             <div className="radio">
               <label>
                 <input 
                   type="radio" 
-                  value="3" 
+                  value="Completed"
+                  checked={newTask.status === "Completed"}  
                   onChange={handleChange}
-                  value={newTask.status}
                 />
-                Done
+                Completed
               </label>
             </div>
           </label>
