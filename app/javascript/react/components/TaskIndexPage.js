@@ -6,7 +6,7 @@ const TaskIndexPage = (props) => {
   const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-      fetch("api/v1/tasks")
+      fetch("/api/v1/tasks")
       .then(response => {
         if(response.ok){
           return response
@@ -16,7 +16,7 @@ const TaskIndexPage = (props) => {
           throw(error)
         }
       })
-      .then(response => {
+      .then(response => {debugger
         return response.json()
       })
       .then(body => {
@@ -25,13 +25,14 @@ const TaskIndexPage = (props) => {
     }, [])
 
   const addNewTask = (formData) => {
-    fetch(`api/v1/tasks`, {
+    fetch(`/api/v1/tasks`, {
       method: 'POST',
       body: JSON.stringify(formData),
       credentials: 'same-origin',
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
+        
       }
     })
     .then(response => {
@@ -149,3 +150,12 @@ const TaskIndexPage = (props) => {
 }
 
 export default TaskIndexPage
+
+
+// .then(response => response.json())
+// .then(body => {
+//   setTasks([
+//     ...tasks, 
+//     body,
+//   ]);
+// })
