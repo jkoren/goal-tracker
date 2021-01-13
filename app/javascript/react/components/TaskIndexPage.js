@@ -76,43 +76,41 @@ const TaskIndexPage = (props) => {
       </div>
 
       <div className="grid-x grid-margin-x">
-        <div>
-          <div className="text-center cell medium-3">
-            <table>
-              <thead>
-                <tr>
-                  <th>To Do:</th>
-                </tr>
-              </thead>
-              <tbody>
-                {taskTiles}
-              </tbody>
-            </table>
-          </div>
-          <div className="cell medium-3 text-center">
-            <table>
-              <thead>
-                <tr>
-                  <th>In Progress:</th>
-                </tr>
-              </thead>
-              <tbody>
-                {taskTiles}
-              </tbody>
-            </table>
-          </div>
-          <div className="cell medium-3 text-center">
-            <table>
-              <thead>
-                <tr>
-                  <th>Completed:</th>
-                </tr>
-              </thead>
-              <tbody>
-                {taskTiles}
-              </tbody>
-            </table>
-          </div>
+        <div className="cell medium-4 text-center">
+          <table>
+            <thead>
+              <tr>
+                <th>To Do:</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskTiles}
+            </tbody>
+          </table>
+        </div>
+        <div className="cell medium-4 text-center">
+          <table>
+            <thead>
+              <tr>
+                <th>In Progress:</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskTiles}
+            </tbody>
+          </table>
+        </div>
+        <div className="cell medium-4 text-center">
+          <table>
+            <thead>
+              <tr>
+                <th>Completed:</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskTiles}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
