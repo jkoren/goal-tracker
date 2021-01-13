@@ -1,0 +1,57 @@
+// general.scss
+@import "./color_palette";
+@import "./font_palette";
+
+.black-lettering {
+  color: black;
+}
+
+.top-bar.menu {
+  background-color: $primary;
+}
+
+.top-bar {
+  .submenu{
+    font-size: 75%
+  }
+}
+
+.top-bar-left {
+  display: inline-flex;
+  font: $primary_font
+}
+
+.does_exist {
+  color: green
+}
+
+.doesnt_exist {
+  color: red
+}
+
+.business-card {
+  font-size: 75%
+}
+
+.normal-size {
+  font-size: 100%
+}
+
+// for tiles
+.box-shadow {
+  box-shadow: 0 4px 20px 0 grey;
+}
+
+.hover-zoom {
+  transition: all .2s ease-in-out;
+}
+
+.hover-zoom:hover{
+  transform: scale(1.1);
+}
+
+pre {
+  white-space: pre-wrap;
+  font-family: $primary-font, sans-serif;
+  color: $dark-accent;
+}

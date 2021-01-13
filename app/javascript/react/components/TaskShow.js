@@ -26,12 +26,10 @@ const TaskShow = (props) => {
             }
           })
           .then(response => response.json())
-          .then(body => {debugger
+          .then(body => {
             setTask(body)
-            
           })
           .catch(error => console.error(`Error in fetch: ${error.message}`))
-          debugger
         }, [])
         
       
@@ -102,7 +100,7 @@ const TaskShow = (props) => {
           <tbody>
             {task.timer_starts_at}
           </tbody>
-          
+
         </table>
       </div>
     </div>

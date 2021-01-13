@@ -4,7 +4,11 @@ const TaskFormContainer = (props) => {
   const [newTask, setNewTask] = useState({
     title: "",
     body: "",
-    task_starts_at: Date.now()
+    task_starts_at: Date.now(),
+    timer_starts_at: Date.now(),
+    time_worked: 0,
+    status: 0,
+    hashtags: []
   });
   
   const handleChange = event => {
@@ -20,93 +24,105 @@ const TaskFormContainer = (props) => {
     setNewTask({
       title: "",
       body: "",
-      task_starts_at: Date.now()
+      task_starts_at: Date.now(),
+      timer_starts_at: Date.now(),
+      time_worked: 0,
+      status: 0,
+      hashtags: []
     });
     // }
   };
   
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        To Do:
-        <input
-          name="title"
-          id="title"
-          type="text"
-          onChange={handleChange}
-          value={newTask.title}
-        />
-      </label>
-      <label>
-        Description:
-        <textarea 
-          name="body" 
-          id="body"
-          rows="3"
-          onChange={handleChange}
-          value={newTask.body}>
-        </textarea>
-      </label>
+    <form onSubmit={handleSubmit} className="new-task-form callout">
+      <div className = "grid-x">
 
-
-      <label>
-        Status:
-        <div className="radio">
+        <div className="medium-4">
           <label>
-            <input 
-              type="radio" 
-              value="1" 
-              checked={true} 
+            To Do:
+            <input
+              name="title"
+              id="title"
+              type="text"
               onChange={handleChange}
-              value={newTask.status}
+              value={newTask.title}
             />
-            To do
+          </label>
+          <label>
+            Description:
+            <textarea 
+              name="body" 
+              id="body"
+              rows="3"
+              onChange={handleChange}
+              value={newTask.body}>
+            </textarea>
           </label>
         </div>
-        <div className="radio">
-          <label>
-            <input 
-              type="radio" 
-              value="2"
-              onChange={handleChange}
-              value={newTask.status}
-            />
-            Doing
-          </label>
-        </div>
-        <div className="radio">
-          <label>
-            <input 
-              type="radio" 
-              value="3" 
-              onChange={handleChange}
-              value={newTask.status}
-            />
-            Done
-          </label>
-        </div>
-      </label>
 
-      <label>
-        Starts At:
-        <input type="datetime-local"    
-          id="task_starts_at" 
-          name="task_starts_at"
-          onChange={handleChange}
-          value={newTask.task_starts_at}
-          />
-      </label>
-      <label>
-        Hashtags:
-        <input type="text"
-          id="hashtag"
-          name="hashtag"
-          onChange={handleChange}
-          value={newTask.hashtag}
-        />
-      </label>
+        <div className="medium-4 text-center">
+          <label>
+            Status:
+            <div className="radio">
+              <label>
+                <input 
+                  type="radio" 
+                  value="1" 
+                  checked={true} 
+                  onChange={handleChange}
+                  value={newTask.status}
+                />
+                To do
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input 
+                  type="radio" 
+                  value="2"
+                  onChange={handleChange}
+                  value={newTask.status}
+                />
+                Doing
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input 
+                  type="radio" 
+                  value="3" 
+                  onChange={handleChange}
+                  value={newTask.status}
+                />
+                Done
+              </label>
+            </div>
+          </label>
+        </div>
+
+        <div className="medium-4">
+          <label>
+            Starts At:
+            <input type="datetime-local"    
+              id="task_starts_at" 
+              name="task_starts_at"
+              onChange={handleChange}
+              value={newTask.task_starts_at}
+              />
+          </label>
+          <label>
+            Hashtags:
+            <input type="text"
+              id="hashtag"
+              name="hashtag"
+              onChange={handleChange}
+              value={newTask.hashtag}
+            />
+          </label>
+        </div>
+      </div>
       
-      <div>
+      <div className="text-center">
         <input className="button" type="submit" value="Submit" />
       </div>
     </form>

@@ -1,0 +1,9 @@
+@import "./color_palette";
+@import "./font_palette";
+
+.web-site-meat {
+  background-color: $light-accent;
+  font-family: $primary-font, sans-serif;
+  color: $dark-accent;
+  font-size: 100%;
+}

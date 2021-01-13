@@ -20,8 +20,7 @@ const TaskIndexPage = (props) => {
         return response.json()
       })
       .then(body => {
-        setTasks(body)
-        
+        setTasks(body.tasks)
       }).catch(error => console.error(`Error in fetch: ${error.message}`))
     }, [])
 
@@ -54,8 +53,38 @@ const TaskIndexPage = (props) => {
   })
   .catch(error => console.error(`Error in fetch: ${error.message}`));
 };
+  // const taskTiles = tasks.map((task) => {
+  //   return(
+  //     <div>
+  //       <TaskTile
+  //         key={task.id} 
+  //         data={task}
+  //       />
+  //     </div>
+  //   )
+  // })
 
-  const taskTiles = tasks.map((task) => {
+  const toDoTaskTiles = tasks.filter(task => task.status == "To Do").map((task) => {
+    return(
+      <div>
+        <TaskTile
+          key={task.id} 
+          data={task}
+        />
+      </div>
+    )
+  })
+  const inProgressTaskTiles = tasks.filter(task => task.status == "In Progress").map((task) => {
+    return(
+      <div>
+        <TaskTile
+          key={task.id} 
+          data={task}
+        />
+      </div>
+    )
+  })
+  const completedTaskTiles = tasks.filter(task => task.status == "Completed").map((task) => {
     return(
       <div>
         <TaskTile
@@ -67,17 +96,19 @@ const TaskIndexPage = (props) => {
   })
 
   return(
-    <>
+    <div>
       <div className="grid-x grid-margin-x">
-        <div className = "medium-offset-1">
-          <div className="medium-3 callout">
-            <TaskFormContainer addNewTask={addNewTask} />
+        <div className="show-callout">
+          <div className = "medium-offset-1">
+            <div className="medium-3 callout">
+              <TaskFormContainer addNewTask={addNewTask} />
+            </div>
           </div>
         </div>
       </div>
 
       <div className="grid-x grid-margin-x">
-        <div className="medium-offset-1 medium-3">
+        <div className="cell medium-4 text-center">
           <table>
             <thead>
               <tr>
@@ -85,26 +116,36 @@ const TaskIndexPage = (props) => {
               </tr>
             </thead>
             <tbody>
-              {taskTiles}
+              {toDoTaskTiles}
             </tbody>
           </table>
+        </div>
+        <div className="cell medium-4 text-center">
           <table>
             <thead>
               <tr>
                 <th>In Progress:</th>
               </tr>
             </thead>
+            <tbody>
+              {inProgressTaskTiles}
+            </tbody>
           </table>
+        </div>
+        <div className="cell medium-4 text-center">
           <table>
             <thead>
               <tr>
                 <th>Completed:</th>
               </tr>
             </thead>
+            <tbody>
+              {completedTaskTiles}
+            </tbody>
           </table>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
