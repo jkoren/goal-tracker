@@ -21,13 +21,6 @@
   font: $primary_font
 }
 
-.does_exist {
-  color: green
-}
-
-.doesnt_exist {
-  color: red
-}
 
 .business-card {
   font-size: 75%
@@ -54,4 +47,16 @@ pre {
   white-space: pre-wrap;
   font-family: $primary-font, sans-serif;
   color: $dark-accent;
+}
+
+to-do {
+  background-color: pink;
+}
+
+in-progress {
+
+}
+
+completed {
+
 }

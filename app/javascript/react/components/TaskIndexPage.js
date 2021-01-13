@@ -16,7 +16,7 @@ const TaskIndexPage = (props) => {
           throw(error)
         }
       })
-      .then(response => {debugger
+      .then(response => {
         return response.json()
       })
       .then(body => {
@@ -100,7 +100,7 @@ const TaskIndexPage = (props) => {
       <div className="grid-x grid-margin-x">
         <div className="show-callout">
           <div className = "medium-offset-1">
-            <div className="medium-3 callout">
+            <div className="medium-7 callout">
               <TaskFormContainer addNewTask={addNewTask} />
             </div>
           </div>

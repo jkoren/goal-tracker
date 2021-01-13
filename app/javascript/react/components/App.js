@@ -7,6 +7,7 @@ import TaskShow from './TaskShow'
 export const App = (props) => {
   return (
     <div className="web-site-meat">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={TaskIndexPage}/>
