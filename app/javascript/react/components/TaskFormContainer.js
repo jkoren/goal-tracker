@@ -26,7 +26,7 @@ const TaskFormContainer = (props) => {
   };
   
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="new-task-form callout">
       <div className = "grid-x">
 
         <div className="medium-4">
