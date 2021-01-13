@@ -15,9 +15,9 @@ Task.create(title: "Create Back End Controller",task_starts_at: DateTime.now, st
 Task.create(title: "Build Index Page",task_starts_at: DateTime.now, status: 1, user: matthew)
 Task.create(title: "Build Show Page",task_starts_at: DateTime.now, status: 1, user: matthew)
 
-Hashtag.create(title: "Danger", task: task1)
-Hashtag.create(title: "Caution", task: task1)
-Hashtag.create(title: "Go", task: task1)
-Hashtag.create(title: "Danger", task: task2)
-Hashtag.create(title: "Fughedaboutit", task: task2)
+Hashtag.create(title: "Danger", task: task1, color: "red")
+Hashtag.create(title: "Caution", task: task1, color: "yellow")
+Hashtag.create(title: "Go", task: task1, color: "green")
+Hashtag.create(title: "Danger", task: task2, color: "red")
+Hashtag.create(title: "Fughedaboutit", task: task2, color: "blue")
 
