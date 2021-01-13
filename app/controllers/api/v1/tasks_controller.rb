@@ -14,8 +14,6 @@ class Api::V1::TasksController < ApplicationController
   # GET /tasks
   def index
     @tasks = Task.all.sort_by{ |a| a[:created_at] }.reverse
-    #Ted do we need this line?
-    # @tasks = Task.search(params[:search])
     render json: @tasks, each_serializer: TaskSerializer
   end
 
@@ -23,7 +21,14 @@ class Api::V1::TasksController < ApplicationController
   def show
     render json: @task, serializer: TaskSerializer
   end
-  
+
+  def search
+    binding.pry
+    @parameter = params[:search].downcase
+    @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
+    render json: @results
+  end
+
   # POST /tasks
   def create
     @task = Task.new(task_params)
