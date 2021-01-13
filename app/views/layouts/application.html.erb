@@ -11,9 +11,8 @@
     <nav class="top-bar">
       <h1><a href="/">Goal Tracker</a></h1>
 
-      <h4>Search by Category:</h4>
         <%= form_tag(tasks_path, method: :get) do %>
-          <%= text_field_tag(:search, params[:search]) %>
+          Search by Category: <%= text_field_tag(:title, params[:title], placeholder: "Search") %>
           <%= submit_tag ("Search") %>
         <% end %>
 
