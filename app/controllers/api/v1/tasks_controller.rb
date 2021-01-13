@@ -20,7 +20,14 @@ class Api::V1::TasksController < ApplicationController
   def show
     render json: @task, serializer: TaskSerializer
   end
-  
+
+  def search
+    binding.pry
+    @parameter = params[:search].downcase
+    @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
+    render json: @results
+  end
+
   # POST /tasks
   def create
     @task = Task.new(task_params)
