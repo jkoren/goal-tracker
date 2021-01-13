@@ -5,13 +5,15 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks
   def index
-    render json: Task.all.sort_by{ |a| a[:updated_at] }.reverse
-    @tasks = Task.search(params[:search])
+    @tasks = Task.all.sort_by{ |a| a[:created_at] }.reverse
+    #Ted do we need this line?
+    # @tasks = Task.search(params[:search])
+    render json: @tasks, each_serializer: TaskSerializer
   end
 
   # GET /tasks/1
   def show
-    render json: @task
+    render json: @task, serializer: TaskSerializer
   end
   
   # POST /tasks
