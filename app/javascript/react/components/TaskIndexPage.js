@@ -20,7 +20,7 @@ const TaskIndexPage = (props) => {
         return response.json()
       })
       .then(body => {
-        setTasks(body)
+        setTasks(body.tasks)
       }).catch(error => console.error(`Error in fetch: ${error.message}`))
     }, [])
 
@@ -52,7 +52,6 @@ const TaskIndexPage = (props) => {
   })
   .catch(error => console.error(`Error in fetch: ${error.message}`));
 };
-
   const taskTiles = tasks.map((task) => {
     return(
       <div>

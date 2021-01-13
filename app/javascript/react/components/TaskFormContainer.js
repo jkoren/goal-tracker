@@ -4,7 +4,11 @@ const TaskFormContainer = (props) => {
   const [newTask, setNewTask] = useState({
     title: "",
     body: "",
-    task_starts_at: Date.now()
+    task_starts_at: Date.now(),
+    timer_starts_at: Date.now(),
+    time_worked: 0,
+    status: 0,
+    hashtags: []
   });
   
   const handleChange = event => {
@@ -20,7 +24,11 @@ const TaskFormContainer = (props) => {
     setNewTask({
       title: "",
       body: "",
-      task_starts_at: Date.now()
+      task_starts_at: Date.now(),
+      timer_starts_at: Date.now(),
+      time_worked: 0,
+      status: 0,
+      hashtags: []
     });
     // }
   };
