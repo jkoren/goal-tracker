@@ -20,7 +20,7 @@ const TaskTile = (props) =>{
           {props.data.title} <br></br>
         </Link>
           {props.data.status}
-          <div>{hashtagTiles}</div>
+          <div className="medium-4">{hashtagTiles}</div>
     </div>
   )
 }
