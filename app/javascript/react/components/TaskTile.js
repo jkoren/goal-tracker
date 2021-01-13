@@ -15,12 +15,12 @@ const TaskTile = (props) =>{
     )
   })
   return(
-    <div className="cell callout box-shadow hover-zoom business-card">
-        <Link to={`tasks/${props.data.id}`} >
+    <div className="cell callout box-shadow hover-zoom ">
+        <Link to={`tasks/${props.data.id}`} className="normal-size">
           {props.data.title} <br></br>
+        </Link>
           {props.data.status}
           <div>{hashtagTiles}</div>
-        </Link>
     </div>
   )
 }
