@@ -27,7 +27,7 @@ const TaskShow = (props) => {
           })
           .then(response => response.json())
           .then(body => {
-            setTask(body)
+            setTask(body.task)
           })
           .catch(error => console.error(`Error in fetch: ${error.message}`))
         }, [])
@@ -37,13 +37,6 @@ const TaskShow = (props) => {
 
   return(
     <>
-    <div className="grid-x grid-margin-x">
-      <div className = "medium-offset-1">
-        <div className="medium-3 callout">
-          
-        </div>
-      </div>
-    </div>
 
     <div className="grid-x grid-margin-x">
       <div className="medium-offset-1 medium-6">

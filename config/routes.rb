@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "/tasks/:id", to: "homes#index"
+  get "/tasks/:id/destroy", to: "homes#index"
   get "/tasks", to: "homes#index"
   
   namespace :api do

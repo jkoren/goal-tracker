@@ -66,10 +66,14 @@ const TaskTile = (props) =>{
           <div className="cell medium-6">
             Hours worked: {diffHours}
           </div>
+          <div>
+          <Link to={`tasks/${props.data.id}/destroy`}>
+        <button type="button" className="button alert">Delete Task</button>
+          </Link>
+        </div>
         </div>
         <div>{hashtagTiles}</div>
         <Link to={`tasks/${props.data.id}/edit`} className="normal-size">Edit</Link>
-        {/* <button onClick={this.handleDelete(task.id)}>Delete</button> */}
       </div>
     </div>
   )

@@ -18,7 +18,9 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks/1
   def show
-    render json: @task, serializer: TaskSerializer
+    
+    @tasks = Task.find(params[:id])
+    render json: @tasks, serializer: TaskSerializer
   end
 
   def search
@@ -71,17 +73,13 @@ class Api::V1::TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
-    @task = Task.find_by(title: params[:title])
-
-    # if @task.destroy
-    #   head :no_content
-    # else
-    #   render json: { error: airline.errors.messages }, status:
-    # end
-
-    @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    @task = Task.find(params[:id])
+    
+    if @task.destroy
+      render json: {destroyed: true}   
+   
   end
+end
 
 def authorize_user
   if !user_signed_in? 
