@@ -37,6 +37,7 @@ const TaskFormContainer = (props) => {
       status: 1,
       hashtags: []
     });
+    location.reload();
   };
 
   return (
