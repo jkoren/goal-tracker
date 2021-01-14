@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom'
 
 import TaskIndexPage from './TaskIndexPage'
 import TaskShow from './TaskShow'
+import DestroyTask from './DestroyTask'
 
 export const App = (props) => {
   return (
@@ -13,6 +14,7 @@ export const App = (props) => {
           <Route exact path="/" component={TaskIndexPage}/>
           <Route exact path="/tasks" component={TaskIndexPage}/>
           <Route exact path="/tasks/:id" component={TaskShow} />
+          <Route exact path="/tasks/:id/destroy" component={DestroyTask} />
         </Switch>
       </BrowserRouter>
     </div>

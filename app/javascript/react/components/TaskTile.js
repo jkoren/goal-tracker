@@ -51,8 +51,15 @@ const TaskTile = (props) =>{
           <div className="cell medium-6">
             Hours worked: {diffHours}
           </div>
+          <div>
+          <Link to={`tasks/${props.data.id}/destroy`}>
+        <button type="button" className="button alert">Delete Task</button>
+          </Link>
+        </div>
         </div>
         <div>{hashtagTiles}</div>
+
+        
       </div>
     </div>
   )

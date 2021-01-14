@@ -18,11 +18,13 @@ class Api::V1::TasksController < ApplicationController
 
   # GET /tasks/1
   def show
-    render json: @task, serializer: TaskSerializer
+    
+    @tasks = Task.find(params[:id])
+    render json: @tasks, serializer: TaskSerializer
   end
 
   def search
-    binding.pry
+    
     @parameter = params[:search].downcase
     @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
     render json: @results
@@ -53,9 +55,13 @@ class Api::V1::TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
-    @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    @task = Task.find(params[:id])
+    
+    if @task.destroy
+      render json: {destroyed: true}   
+   
   end
+end
 
 def authorize_user
   if !user_signed_in? 
@@ -65,15 +71,15 @@ end
 
 private
     # Use callbacks to share common setup or constraints between actions.
-  #   def set_task
-  #     @task = Task.find(params[:id])
-  #   end
+    def set_task
+      @task = Task.find(params[:id])
+    end
 
-  #   def authenticate_user
-  #     if !user_signed_in?
-  #       render json: {error: ["You need to be signed in first"]}
-  #   end
-  # end
+    def authenticate_user
+      if !user_signed_in?
+        render json: {error: ["You need to be signed in first"]}
+    end
+  end
 
   # Only allow a trusted parameter "white list" through.
   def task_params
