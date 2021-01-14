@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import TaskFormContainer from './TaskFormContainer'
+import EditTask from "./UpdateTask"
 import TaskTile from './TaskTile'
 
 const TaskIndexPage = (props) => {

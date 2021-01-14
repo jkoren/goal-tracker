@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Redirect } from "react-router-dom"
 
 const DestroyTask = (props) => {
+  debugger
   const [currentTask, setCurrentTask] = useState({})
   const [shouldRedirect, setShouldRedirect] = useState(false)
 
@@ -59,7 +60,6 @@ const DestroyTask = (props) => {
       setShouldRedirect(true)
     }
 
-
       if (shouldRedirect) {
         return <Redirect to='/Tasks' />
       }
@@ -75,14 +75,4 @@ const DestroyTask = (props) => {
       )
     }
 
-
-
-
-
 export default DestroyTask
-
-
-
-
-
-

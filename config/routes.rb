@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "/tasks/:id", to: "homes#index"
   get "/tasks/:id/destroy", to: "homes#index"
+  get "/tasks/:id/update", to: "homes#index"
   get "/tasks", to: "homes#index"
   
   namespace :api do

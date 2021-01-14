@@ -56,13 +56,7 @@ class Api::V1::TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1
   def update
-    @task = Task.find_by(title: params[:title])
-
-    # if @task.update(task_params)
-    #   render json: TaskSerializer.new(task).serialized_json
-    # else
-    #   render json: { error: airline.errors.messages }, status:
-    # end
+    @task = Task.find_by(id: params[:id])
 
     if @task.update(task_params)
       redirect_to @tasks, notice: 'Task was successfully updated.'

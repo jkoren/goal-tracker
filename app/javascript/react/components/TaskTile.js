@@ -68,12 +68,14 @@ const TaskTile = (props) =>{
           </div>
           <div>
           <Link to={`tasks/${props.data.id}/destroy`}>
-        <button type="button" className="button alert">Delete Task</button>
+            <button type="button" className="button alert">Delete Task</button>
           </Link>
         </div>
         </div>
         <div>{hashtagTiles}</div>
-        <Link to={`tasks/${props.data.id}/edit`} className="normal-size">Edit</Link>
+        <Link to={`tasks/${props.data.id}/update`}> 
+          <button type="button" className="button alert">Edit</button>
+        </Link>
       </div>
     </div>
   )

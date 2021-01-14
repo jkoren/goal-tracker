@@ -16,7 +16,7 @@ export const App = (props) => {
           <Route exact path="/tasks" component={TaskIndexPage}/>
           <Route exact path="/tasks/:id" component={TaskShow} />
           <Route exact path="/tasks/:id/destroy" component={DestroyTask} />
-          <Route exact path="/tasks/:id/edit" component={UpdateTask} />
+          <Route exact path="/tasks/:id/update" component={UpdateTask} />
         </Switch>
       </BrowserRouter>
     </div>
