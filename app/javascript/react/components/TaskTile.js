@@ -4,31 +4,20 @@ import { Link } from 'react-router-dom'
 const TaskTile = (props) =>{
   let textColor = "white"
 
+
+
   let tileStyle
   if (props.data.status == 1)  {tileStyle = "to-do"}
   else if (props.data.status == 2) {tileStyle = "in-progress"}
   else {tileStyle = "completed"}
 
-  // const fetchTaskList = () => {
-  //   fetch(`/api/v1/tasks`)
-  //   .then((response) => response.json())
-  //   .then((tasks) => this.setState({ tasks}))
-  // }
-
-  // const handleDelete = () => {
-  //   const id = props.match.params.id 
-  //   fetch(`/api/v1/tasks/${id}`, { method: 'delete' })
-  //   .then((response) => {
-  //     alert('Post deleted successfully')
-  //     this.fetchTaskList()
-  //   })
-  // }
-
-  // if (props.data.status == 2) { 
-  //   let stopwatchTile = <i class="fas fa-stopwatch fa-2x"></i>
-  // } else {
-  //   let stopwatchTile = ""
-  // }
+  let stopwatchTile
+  if (props.data.status == "In Progress") { 
+    // stopwatchTile = (<i class="fas fa-stopwatch fa-2x" onClick={handleStopwatchClick}></i>)
+    stopwatchTile = (<i class="fas fa-stopwatch fa-2x"></i>)
+  } else {
+    stopwatchTile = (<br></br>)
+  }
 
   const hashtagTiles = props.data.hashtags.map((hashtag) => {
     return (
@@ -50,6 +39,7 @@ const TaskTile = (props) =>{
   return(
     <div className="cell callout box-shadow hover-zoom">
       <div className = "to-do">
+        Goal: 
         <Link to={`tasks/${props.data.id}`} className="normal-size">
           {props.data.title} <br></br>
         </Link>
@@ -58,22 +48,29 @@ const TaskTile = (props) =>{
             {props.data.status}
           </div>
           <div className="cell medium-6">
-            Days since start:{diffDays} ({diffHours} hrs)
+            Elapsed: {diffDays} days ({diffHours} hrs)
           </div>
           <div className="cell medium-6">
-            <i class="fas fa-stopwatch fa-2x"></i>
+            {stopwatchTile}
           </div>
           <div className="cell medium-6">
-            Hours worked: {diffHours}
+            Effort: {props.data.time_worked} mins
           </div>
           <div>
-          <Link to={`tasks/${props.data.id}/destroy`}>
-        <button type="button" className="button alert">Delete Task</button>
-          </Link>
+          
         </div>
         </div>
-        <div>{hashtagTiles}</div>
-        <Link to={`tasks/${props.data.id}/edit`} className="normal-size">Edit</Link>
+        <div className = "grid-x">
+          <p className = "medium-4">
+            {hashtagTiles}
+          </p>
+        </div>
+        <Link to={`tasks/${props.data.id}/edit`}>
+          <i class="far fa-edit fa-1x"></i>
+        </Link>
+        <Link to={`tasks/${props.data.id}/destroy`}>
+          <i class="far fa-trash-alt fa-1x"></i>
+        </Link>
       </div>
     </div>
   )

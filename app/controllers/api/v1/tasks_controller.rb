@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:create, :update]
  
-  before_action :authorize_user, except: [:index, :show]
+  # before_action :authorize_user, except: [:index, :show]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # before_action :authenticate_user, except: [:index, :show]
@@ -28,7 +28,16 @@ class Api::V1::TasksController < ApplicationController
     @tasks = Task.all
     selectedTasks = []
     @tasks.each do | task |
-      if task.title.downcase.include?(@term)
+      found = false
+      found = task.title.downcase.include?(@term)
+      if !found
+        task.hashtags.each do | hashtag |
+          if !found
+            found = hashtag.title.downcase.include?(@term)
+          end
+        end
+      end
+      if found
         selectedTasks << task
       end
     end
@@ -49,20 +58,18 @@ class Api::V1::TasksController < ApplicationController
     if @task.save
       flash[:notice] = 'Task was successfully created.'
       render json: @task
-    else
-      render json: :new
+    else 
+      render json: @task, status: :error
+      # https://medium.com/rails-ember-beyond/error-handling-in-rails-the-modular-way-9afcddd2fe1b
+      
+      # render json: {status: "error", code: 3000, message: "User is not logged in"}
+      # https://www.thegreatcodeadventure.com/rails-api-painless-error-handling-and-rendering-2/
     end
   end
 
   # PATCH/PUT /tasks/1
   def update
     @task = Task.find_by(title: params[:title])
-
-    # if @task.update(task_params)
-    #   render json: TaskSerializer.new(task).serialized_json
-    # else
-    #   render json: { error: airline.errors.messages }, status:
-    # end
 
     if @task.update(task_params)
       redirect_to @tasks, notice: 'Task was successfully updated.'
@@ -74,11 +81,11 @@ class Api::V1::TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task = Task.find(params[:id])
-    
     if @task.destroy
-      render json: {destroyed: true}   
-   
+      render json: {destroyed: true}
+    end   
   end
+
 end
 
 def authorize_user
@@ -88,19 +95,18 @@ def authorize_user
 end
 
 private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    def authenticate_user
-      if !user_signed_in?
-        render json: {error: ["You need to be signed in first"]}
+  def authenticate_user
+    if !user_signed_in?
+      render json: {error: ["You need to be signed in first"]}
     end
   end
 
-  # Only allow a trusted parameter "white list" through.
-  def task_params
-    params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :search)
-  end
-end
+    # Only allow a trusted parameter "white list" through.
+    def task_params
+      params.require(:task).permit(:title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :search)
+    end

@@ -5,6 +5,17 @@ import TaskTile from './TaskTile'
 const TaskIndexPage = (props) => {
   const [tasks, setTasks] = useState([])
 
+  const handleStopwatchClick = event => {
+    console.log("you are logging time against this goal!")
+    // if (task.timer_starts_at == nil) {
+    //   task.timer_starts_at = TimeNow
+    // } else {
+    //   diff = TimeNow - task.timer_starts_at
+    //   task.time_worked += diff
+    //   task.timer_starts_at = nil
+    // }
+  }
+
     useEffect(() => {
       fetch("/api/v1/tasks")
       .then(response => {
@@ -21,7 +32,7 @@ const TaskIndexPage = (props) => {
       })
       .then(body => {
         setTasks(body.tasks)
-      }).catch(error => console.error(`Error in fetch: ${error.message}`))
+      }).catch(error => console.error(`Error in fetch GET: ${error.message}`))
     }, [])
 
   const addNewTask = (formData) => {
@@ -50,7 +61,7 @@ const TaskIndexPage = (props) => {
         body,
       ]);
   })
-  .catch(error => console.error(`Error in fetch: ${error.message}`));
+  .catch(error => console.error(`Error in fetchPOST: ${error.message}`));
 };
 
   const toDoTaskTiles = tasks.filter(task => task.status == "To Do").map((task) => {
@@ -69,6 +80,7 @@ const TaskIndexPage = (props) => {
         <TaskTile
           key={task.id} 
           data={task}
+          handleStopwatchClick={handleStopwatchClick}
         />
       </div>
     )
@@ -104,9 +116,9 @@ const TaskIndexPage = (props) => {
                 <th>To Do:</th>
               </tr>
             </thead>
-            <tbody>
+            {/* <tbody> */}
               {toDoTaskTiles}
-            </tbody>
+            {/* </tbody> */}
           </table>
         </div>
         <div className="cell medium-4 text-center">
@@ -116,9 +128,9 @@ const TaskIndexPage = (props) => {
                 <th>In Progress:</th>
               </tr>
             </thead>
-            <tbody>
+            {/* <tbody> */}
               {inProgressTaskTiles}
-            </tbody>
+            {/* </tbody> */}
           </table>
         </div>
         <div className="cell medium-4 text-center">
@@ -128,9 +140,9 @@ const TaskIndexPage = (props) => {
                 <th>Completed:</th>
               </tr>
             </thead>
-            <tbody>
+            {/* <tbody> */}
               {completedTaskTiles}
-            </tbody>
+            {/* </tbody> */}
           </table>
         </div>
       </div>
@@ -139,12 +151,3 @@ const TaskIndexPage = (props) => {
 }
 
 export default TaskIndexPage
-
-
-// .then(response => response.json())
-// .then(body => {
-//   setTasks([
-//     ...tasks, 
-//     body,
-//   ]);
-// })
