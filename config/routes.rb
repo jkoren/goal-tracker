@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  # get 'task/create'
-  # get 'task/show'
-  # get 'task/destroy'
-  # get 'task/update'
   root 'homes#index'
   devise_for :users
 
@@ -10,9 +6,9 @@ Rails.application.routes.draw do
   get "/tasks/:id/destroy", to: "homes#index"
   get "/tasks", to: "homes#index"
   
-
   namespace :api do
     namespace :v1 do
+      get "/search/:term", to: "tasks#search"
       resources :tasks, only: [:index, :show, :create, :edit, :destroy, :update]
     end
   end

@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:create, :update]
  
-  before_action :authorize_user, except: [:index, :show, :create]
+  before_action :authorize_user, except: [:index, :show]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # before_action :authenticate_user, except: [:index, :show]
@@ -24,10 +24,20 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def search
-    
-    @parameter = params[:search].downcase
-    @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
-    render json: @results
+    @term = params[:term].downcase
+    @tasks = Task.all
+    selectedTasks = []
+    @tasks.each do | task |
+      if task.title.downcase.include?(@term)
+        selectedTasks << task
+      end
+    end
+    if !selectedTasks.empty?
+      render json: selectedTasks
+    else
+      # what to do if empty
+      render json: ["no match"]
+    end
   end
 
   # POST /tasks
@@ -46,6 +56,14 @@ class Api::V1::TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1
   def update
+    @task = Task.find_by(title: params[:title])
+
+    # if @task.update(task_params)
+    #   render json: TaskSerializer.new(task).serialized_json
+    # else
+    #   render json: { error: airline.errors.messages }, status:
+    # end
+
     if @task.update(task_params)
       redirect_to @tasks, notice: 'Task was successfully updated.'
     else

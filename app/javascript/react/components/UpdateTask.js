@@ -1,57 +1,58 @@
-import React, { useState } from "react"
+import React from 'react';
 
-const TaskFormContainer = (props) => {
-  const [newTask, setNewTask] = useState({
-    title: "",
-    body: "",
-    task_starts_at: Date.now(),
-    timer_starts_at: Date.now(),
-    time_worked: 0,
-    status: "To do",
-    hashtags: []
-  });
-  
-  const handleChange = event => {
-    setNewTask({
-      ...newTask,
-      [event.currentTarget.name]: event.currentTarget.value
-    });
-  };
+export default class UpdateTask extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
 
-  const handleStatusChange = event => {
+    }
+  }
+
+  componentDidMount() {
+    const { match: { params: { id } } } = this.props;
+    fetch(`/api/v1/tasks/${id}`).
+      then((response) => response.json()).
+      then((task) => this.setState({ ...task }));
+  }
+
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleStatusChange = event => {
     setNewTask({
       ...newTask,
       status: parseInt(event.currentTarget.value)
     });
   }
-  
-  const handleSubmit = event => {
-    event.preventDefault();
-    props.addNewTask(newTask);
-    setNewTask({
-      title: "",
-      body: "",
-      task_starts_at: Date.now(),
-      timer_starts_at: Date.now(),
-      time_worked: 0,
-      status: 1,
-      hashtags: []
+
+  updateTaskRequest = (event) => {
+    fetch(`/api/v1/tasks/${this.state.id}`, {
+      method: 'put',
+      body: JSON.stringify(this.state),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => {
+      alert('Task updated successfully');
+      location.href = '/';
     });
-  };
+  }
 
-  return (
-    <form onSubmit={handleSubmit} className="new-task-form callout">
-      <div className = "grid-x">
-
-        <div className="medium-4">
-          <label>
+  render() {
+    const {title, body, } = this.state;
+    return (
+      <div>
+        <h3>Edit Task</h3>
+        <div>
+         <label>
             To Do:
             <input
               name="title"
               id="title"
               type="text"
-              onChange={handleChange}
-              value={newTask.title}
+              onChange={this.handleChange}
+              value={title}
               required
             />
           </label>
@@ -61,8 +62,8 @@ const TaskFormContainer = (props) => {
               name="body" 
               id="body"
               rows="3"
-              onChange={handleChange}
-              value={newTask.body}>
+              onChange={this.handleChange}
+              value={body}>
             </textarea>
           </label>
         </div>
@@ -75,8 +76,8 @@ const TaskFormContainer = (props) => {
                 <input 
                   type="radio" 
                   value="1" 
-                  checked={newTask.status === 1} 
-                  onChange={handleStatusChange}
+                  checked={status === 1} 
+                  onChange={this.handleStatusChange}
                 />
                 To do
               </label>
@@ -86,8 +87,8 @@ const TaskFormContainer = (props) => {
                 <input 
                   type="radio" 
                   value="2"
-                  checked={newTask.status === 2} 
-                  onChange={handleStatusChange}
+                  checked={status === 2} 
+                  onChange={this.handleStatusChange}
                 />
                 In Progress
               </label>
@@ -97,8 +98,8 @@ const TaskFormContainer = (props) => {
                 <input 
                   type="radio" 
                   value="3"
-                  checked={newTask.status === 3}  
-                  onChange={handleStatusChange}
+                  checked={status === 3}  
+                  onChange={this.handleStatusChange}
                 />
                 Completed
               </label>
@@ -107,16 +108,6 @@ const TaskFormContainer = (props) => {
         </div>
 
         <div className="medium-4">
-          <label>
-            Starts At:
-            <input type="datetime-local"    
-              id="task_starts_at" 
-              name="task_starts_at"
-              onChange={handleChange}
-              value={newTask.task_starts_at}
-              required
-              />
-          </label>
           <label>
             Hashtags:
             <br></br>
@@ -129,17 +120,9 @@ const TaskFormContainer = (props) => {
             <input type="checkbox" id="hashtag4" name="hashtag4" value="free time"/>
             <label for="hashtag4">free time</label><br></br>
           </label>
-          {/* <label>
-            Time Since Start: {time_since_start}
-          </label> */}
         </div>
+        <button onClick={this.updateTaskRequest}>Update</button>
       </div>
-      
-      <div className="text-center">
-        <input className="button" type="submit" value="Submit" />
-      </div>
-    </form>
-  )
+    );
+  }
 }
-
-export default TaskFormContainer

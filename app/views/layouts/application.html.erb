@@ -12,7 +12,7 @@
       <h1><a href="/">Goal Tracker</a></h1>
 
         <%= form_tag(tasks_path, method: :get) do %>
-          Search by Category: <%= text_field_tag(:title, params[:title], placeholder: "Search") %>
+          Search by Category: <%= text_field_tag(:name, params[:name], placeholder: "Search") %>
           <%= submit_tag ("Search") %>
         <% end %>
 
