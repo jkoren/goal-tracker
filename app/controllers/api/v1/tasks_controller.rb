@@ -52,8 +52,24 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
+  def search
+    binding.pry
+    @parameter = params[:search].downcase
+    @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
+    render json: @results
+  end
+
+
   # PATCH/PUT /tasks/1
   def update
+    @task = Task.find_by(title: params[:title])
+
+    # if @task.update(task_params)
+    #   render json: TaskSerializer.new(task).serialized_json
+    # else
+    #   render json: { error: airline.errors.messages }, status:
+    # end
+
     if @task.update(task_params)
       redirect_to @tasks, notice: 'Task was successfully updated.'
     else
@@ -63,6 +79,14 @@ class Api::V1::TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
+    @task = Task.find_by(title: params[:title])
+
+    # if @task.destroy
+    #   head :no_content
+    # else
+    #   render json: { error: airline.errors.messages }, status:
+    # end
+
     @task.destroy
     redirect_to tasks_url, notice: 'Task was successfully destroyed.'
   end
