@@ -11,10 +11,10 @@
     <nav class="top-bar web-site-meat">
       <%# <h1><a href="/">Goal Tracker</a></h1> %>
 
-      <%# <a href="/"> %>
+      <a href="/">
         <img src="https://jkorenstein-production.s3.amazonaws.com/goal-tracker/goal-tracker-logo-5.png" alt="Goal Tracker Logo" width="300">
-
-      <%# </a> %>
+      </a>
+      
         <%= form_tag(tasks_path, method: :get) do %>
           Search by Category: <%= text_field_tag(:name, params[:name], placeholder: "Search") %>
           <%= submit_tag ("Search") %>
