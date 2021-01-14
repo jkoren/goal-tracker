@@ -61,7 +61,7 @@ const DestroyTask = (props) => {
     }
 
       if (shouldRedirect) {
-        return <Redirect to='/Tasks' />
+        return <Redirect to='/tasks' />
       }
     
       return (

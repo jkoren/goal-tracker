@@ -7,7 +7,7 @@ const TaskFormContainer = (props) => {
     task_starts_at: Date.now(),
     timer_starts_at: Date.now(),
     time_worked: 0,
-    status: "To do",
+    status: 1,
     hashtags: []
   });
   
@@ -24,7 +24,7 @@ const TaskFormContainer = (props) => {
       status: parseInt(event.currentTarget.value)
     });
   }
-  
+
   const handleSubmit = event => {
     event.preventDefault();
     props.addNewTask(newTask);
@@ -130,9 +130,7 @@ const TaskFormContainer = (props) => {
             <input type="checkbox" id="hashtag4" name="hashtag4" value="free time"/>
             <label for="hashtag4">free time</label><br></br>
           </label>
-          {/* <label>
-            Time Since Start: {time_since_start}
-          </label> */}
+
         </div>
       </div>
       
