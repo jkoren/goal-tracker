@@ -14,9 +14,11 @@ You may also create your own credentials.
 
 [See the deployed application on Heroku](https://goal-tracker-222.herokuapp.com/)
 
-
 ## Screen shot
 # ![SCREENSHOT](app/assets/images/Screen-Shot-2021-01-14.png)
+
+## Preview Demo
+# ![DEMOGIF](https://media.giphy.com/media/6bRryJnxx8I9iZAn8E/giphy.gif)
 
 ## Developers
 - Ted Francis
