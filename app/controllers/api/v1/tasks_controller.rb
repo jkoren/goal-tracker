@@ -52,14 +52,6 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
-  def search
-    binding.pry
-    @parameter = params[:search].downcase
-    @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
-    render json: @results
-  end
-
-
   # PATCH/PUT /tasks/1
   def update
     @task = Task.find_by(title: params[:title])
