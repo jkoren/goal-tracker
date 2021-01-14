@@ -13,6 +13,7 @@ export const App = (props) => {
           <Route exact path="/" component={TaskIndexPage}/>
           <Route exact path="/tasks" component={TaskIndexPage}/>
           <Route exact path="/tasks/:id" component={TaskShow} />
+          {/* <Route exact path="/search" component={TaskShow} /> */}
         </Switch>
       </BrowserRouter>
     </div>

@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:create, :update]
  
-  before_action :authorize_user, except: [:index, :show, :create]
+  before_action :authorize_user, except: [:index, :show]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # before_action :authenticate_user, except: [:index, :show]
@@ -22,10 +22,20 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def search
-    binding.pry
-    @parameter = params[:search].downcase
-    @results = Task.all.where("lower(name) LIKE :search", search: @parameter)
-    render json: @results
+    @term = params[:term].downcase
+    @tasks = Task.all
+    selectedTasks = []
+    @tasks.each do | task |
+      if task.title.downcase.include?(@term)
+        selectedTasks << task
+      end
+    end
+    if !selectedTasks.empty?
+      render json: selectedTasks
+    else
+      # what to do if empty
+      render json: ["no match"]
+    end
   end
 
   # POST /tasks
@@ -65,15 +75,15 @@ end
 
 private
     # Use callbacks to share common setup or constraints between actions.
-  #   def set_task
-  #     @task = Task.find(params[:id])
-  #   end
+    def set_task
+      @task = Task.find(params[:id])
+    end
 
-  #   def authenticate_user
-  #     if !user_signed_in?
-  #       render json: {error: ["You need to be signed in first"]}
-  #   end
-  # end
+    def authenticate_user
+      if !user_signed_in?
+        render json: {error: ["You need to be signed in first"]}
+    end
+  end
 
   # Only allow a trusted parameter "white list" through.
   def task_params
