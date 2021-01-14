@@ -32,7 +32,6 @@ const TaskIndexPage = (props) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
-        
       }
     })
     .then(response => {
@@ -53,6 +52,7 @@ const TaskIndexPage = (props) => {
   })
   .catch(error => console.error(`Error in fetch: ${error.message}`));
 };
+
   // const taskTiles = tasks.map((task) => {
   //   return(
   //     <div>

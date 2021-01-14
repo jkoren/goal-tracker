@@ -9,6 +9,21 @@ const TaskTile = (props) =>{
   else if (props.data.status == 2) {tileStyle = "in-progress"}
   else {tileStyle = "completed"}
 
+  // const fetchTaskList = () => {
+  //   fetch(`/api/v1/tasks`)
+  //   .then((response) => response.json())
+  //   .then((tasks) => this.setState({ tasks}))
+  // }
+
+  // const handleDelete = () => {
+  //   const id = props.match.params.id 
+  //   fetch(`/api/v1/tasks/${id}`, { method: 'delete' })
+  //   .then((response) => {
+  //     alert('Post deleted successfully')
+  //     this.fetchTaskList()
+  //   })
+  // }
+
   // if (props.data.status == 2) { 
   //   let stopwatchTile = <i class="fas fa-stopwatch fa-2x"></i>
   // } else {
@@ -53,6 +68,8 @@ const TaskTile = (props) =>{
           </div>
         </div>
         <div>{hashtagTiles}</div>
+        <Link to={`tasks/${props.data.id}/edit`} className="normal-size">Edit</Link>
+        {/* <button onClick={this.handleDelete(task.id)}>Delete</button> */}
       </div>
     </div>
   )
