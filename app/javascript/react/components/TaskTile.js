@@ -45,17 +45,16 @@ const TaskTile = (props) =>{
         </Link>
         <div className="grid-x">
           <div className="cell medium-6">
-            {props.data.status}
-          </div>
-          <div className="cell medium-6">
+            {/* {props.data.status} */}
             Elapsed: {diffDays} days ({diffHours} hrs)
-          </div>
-          <div className="cell medium-6">
-            {stopwatchTile}
           </div>
           <div className="cell medium-6">
             Effort: {props.data.time_worked} mins
           </div>
+          <div className="cell">
+            {stopwatchTile}
+          </div>
+
           <div>
           
         </div>
