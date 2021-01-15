@@ -3,6 +3,8 @@
 
 Goal-Tracker is a responsive web application to help people accomplish their goals. 
 
+This was built for the Mintbean Hackathon on 1/15/21.
+
 Goal-Tracker's front-end is built with JavaScript and React, and the back end is Rails, Ruby and PostgreSQL.  We used Devise for Authentication and Authorization.
 
 There are full authentication flows.
