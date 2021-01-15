@@ -1,7 +1,7 @@
 
 ## GOAL-TRACKER
 
-Goal-Tracker is a responsive web application to help people accomplish change and progression in their life by achieving goals. 
+Goal-Tracker is a responsive web application to help people accomplish their goals. 
 
 Goal-Tracker's front-end is built with JavaScript and React, and the back end is Rails, Ruby and PostgreSQL.  We used Devise for Authentication and Authorization.
 
