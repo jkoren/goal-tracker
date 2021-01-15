@@ -2,11 +2,6 @@ class Api::V1::TasksController < ApplicationController
   # before_action :authenticate_user!
   protect_from_forgery unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:create, :update]
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
-  
-  # before_action :authorize_user, except: [:index, :show]
-  # before_action :authenticate_user, except: [:index, :show]
-  # before_action :authorize_user, except: [:index, :show, :create]
 
   # GET /tasks
   def index
@@ -80,9 +75,9 @@ class Api::V1::TasksController < ApplicationController
     revised_params["status"] = task_num
  
     if task.update(revised_params)
-      redirect_to @root
+      render json: {status: "updated successfully"}
     else
-      render :edit
+      render json: {error: "update failed"}
     end
   end
 
@@ -104,9 +99,6 @@ end
 
 private
   # Use callbacks to share common setup or constraints between actions.
-  def set_task
-    task = Task.find(params[:id])
-  end
 
   def authenticate_user
     if !user_signed_in?

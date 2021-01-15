@@ -4,13 +4,13 @@ Rails.application.routes.draw do
 
   get "/tasks/:id", to: "homes#index"
   get "/tasks/:id/destroy", to: "homes#index"
-  get "/tasks/:id/update", to: "homes#index"
+  get "/tasks/:id/edit", to: "homes#index"
   get "/tasks", to: "homes#index"
   
   namespace :api do
     namespace :v1 do
-      get "/search/:term", to: "tasks#search"
       resources :tasks, only: [:index, :show, :create, :edit, :destroy, :update]
+      get "/search/:term", to: "tasks#search"
     end
   end
 end
