@@ -9,14 +9,14 @@ import UpdateTask from './UpdateTask'
 export const App = (props) => {
   return (
     <div className="web-site-meat">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={TaskIndexPage}/>
           <Route exact path="/tasks" component={TaskIndexPage}/>
           <Route exact path="/tasks/:id" component={TaskShow} />
           <Route exact path="/tasks/:id/destroy" component={DestroyTask} />
-          <Route exact path="/tasks/:id/update" component={UpdateTask} />
+          <Route exact path="/tasks/:id/edit" component={UpdateTask} />
         </Switch>
       </BrowserRouter>
     </div>

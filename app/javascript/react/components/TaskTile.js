@@ -64,7 +64,7 @@ const TaskTile = (props) =>{
             {hashtagTiles}
           </p>
         </div>
-        <Link to={`tasks/${props.data.id}/update`}>
+        <Link to={`tasks/${props.data.id}/edit`}>
           <i class="far fa-edit fa-1x"></i>
         </Link>
         <Link to={`tasks/${props.data.id}/destroy`}>

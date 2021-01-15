@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 const UpdateTask = (props) => {
@@ -56,9 +56,7 @@ const UpdateTask = (props) => {
     })
     .then(response => response.json())
     .then(body => {
-      if (body.errors) {
-        // handle errors
-      } else {
+      if (!body.error) {
         setShouldRedirect(true)
       }
     })
@@ -73,7 +71,8 @@ const UpdateTask = (props) => {
   }
 
   const handleSubmit = event => {
-      onClickUpdate(onClickUpdate);
+    event.preventDefault()
+    onClickUpdate(onClickUpdate);
   }
 
   const handleStatusChange = event => {
@@ -84,119 +83,124 @@ const UpdateTask = (props) => {
     });
   }
 
-  if (shouldRedirect) {
-    return <Redirect to='/' />
-  }
+
   
   let convertedTaskStartsAt
   convertedTaskStartsAt = updatedTask.task_starts_at.slice(0,16)
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h3>Update Task</h3>
-      <div>
-        <label>
-          To Do:
-          <input
-            name="title"
-            id="title"
-            type="text"
-            onChange={inputChangeHandler}
-            value={updatedTask.title}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea 
-            name="body" 
-            id="body"
-            rows="3"
-            onChange={inputChangeHandler}
-            value={updatedTask.body}>
-          </textarea>
-        </label>
-      </div>
-
-      <div className="medium-4 text-center">
-        <label>
-          Status:
-          <div className="radio">
-            <label>
-              <input 
-                type="radio" 
-                value="To Do"
-                checked={updatedTask.status === "To Do"} 
-                onChange={handleStatusChange}
-              />
-              To do
-            </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input 
-                type="radio" 
-                value="In Progress"
-                checked={updatedTask.status == "In Progress"} 
-                onChange={handleStatusChange}
-              />
-              In Progress
-            </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input 
-                type="radio" 
-                value="Completed"
-                checked={updatedTask.status == "Completed"}  
-                onChange={handleStatusChange}
-              />
-              Completed
-            </label>
-          </div>
-        </label>
-      </div>
-
-      <div className="medium-4">
-        <label>
-          Starts At:
-          <input type="datetime-local"    
-            id="task_starts_at" 
-            name="task_starts_at"
-            onChange={inputChangeHandler}
-            value={convertedTaskStartsAt}
-            required
+  let page
+  if (shouldRedirect) {
+    page = <Redirect to='/tasks' />
+  } else {
+    page = (
+      <form onSubmit={handleSubmit}>
+        <h3>Update Task</h3>
+        <div>
+          <label>
+            To Do:
+            <input
+              name="title"
+              id="title"
+              type="text"
+              onChange={inputChangeHandler}
+              value={updatedTask.title}
+              required
             />
-        </label>
-        <label>
-          Hashtags:
-          <br></br>
-          <input type="checkbox" id="hashtag1" name="hashtag1" value="work"/>
-          <label htmlFor="hashtag1">work</label><br></br>
-          <input type="checkbox" id="hashtag2" name="hashtag2" value="health"/>
-          <label htmlFor="hashtag2">health</label><br></br>
-          <input type="checkbox" id="hashtag3" name="hashtag3" value="education"/>
-          <label htmlFor="hashtag3">education</label><br></br>
-          <input type="checkbox" id="hashtag4" name="hashtag4" value="free time"/>
-          <label htmlFor="hashtag4">free time</label><br></br>
-        </label>
-        <div className="grid-x grid-margin-x align-center">
-          <input
-            className="button cell shrink"
-            type="submit"
-            value="Save Task"
-          />
-          <button
-            className="button cell shrink"
-            type="button"
-            onClick={props.onDiscardClickHandler}
-          >
-            Discard Changes
-          </button>
+          </label>
+          <label>
+            Description:
+            <textarea 
+              name="body" 
+              id="body"
+              rows="3"
+              onChange={inputChangeHandler}
+              value={updatedTask.body}>
+            </textarea>
+          </label>
         </div>
-      </div>
-    </form>
-  );
+
+        <div className="medium-4 text-center">
+          <label>
+            Status:
+            <div className="radio">
+              <label>
+                <input 
+                  type="radio" 
+                  value="To Do"
+                  checked={updatedTask.status === "To Do"} 
+                  onChange={handleStatusChange}
+                />
+                To do
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input 
+                  type="radio" 
+                  value="In Progress"
+                  checked={updatedTask.status == "In Progress"} 
+                  onChange={handleStatusChange}
+                />
+                In Progress
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input 
+                  type="radio" 
+                  value="Completed"
+                  checked={updatedTask.status == "Completed"}  
+                  onChange={handleStatusChange}
+                />
+                Completed
+              </label>
+            </div>
+          </label>
+        </div>
+
+        <div className="medium-4">
+          <label>
+            Starts At:
+            <input type="datetime-local"    
+              id="task_starts_at" 
+              name="task_starts_at"
+              onChange={inputChangeHandler}
+              value={convertedTaskStartsAt}
+              required
+              />
+          </label>
+          <label>
+            Hashtags:
+            <br></br>
+            <input type="checkbox" id="hashtag1" name="hashtag1" value="work"/>
+            <label htmlFor="hashtag1">work</label><br></br>
+            <input type="checkbox" id="hashtag2" name="hashtag2" value="health"/>
+            <label htmlFor="hashtag2">health</label><br></br>
+            <input type="checkbox" id="hashtag3" name="hashtag3" value="education"/>
+            <label htmlFor="hashtag3">education</label><br></br>
+            <input type="checkbox" id="hashtag4" name="hashtag4" value="free time"/>
+            <label htmlFor="hashtag4">free time</label><br></br>
+          </label>
+          <div className="grid-x grid-margin-x align-center">
+            <input
+              className="button cell shrink"
+              type="submit"
+              value="Save Task"
+            />
+            <button
+              className="button cell shrink"
+              type="button"
+              onClick={props.onDiscardClickHandler}
+            >
+              Discard Changes
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  return page
 };
 
   
