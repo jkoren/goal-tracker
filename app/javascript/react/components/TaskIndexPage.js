@@ -7,6 +7,7 @@ const TaskIndexPage = (props) => {
 
   const handleStopwatchClick = event => {
     console.log("you are logging time against this goal!")
+    // to be completed to get stopwatch timer to work
     // if (task.timer_starts_at == nil) {
     //   task.timer_starts_at = TimeNow
     // } else {
@@ -116,9 +117,7 @@ const TaskIndexPage = (props) => {
                 <th>To Do:</th>
               </tr>
             </thead>
-            {/* <tbody> */}
               {toDoTaskTiles}
-            {/* </tbody> */}
           </table>
         </div>
         <div className="cell medium-4 text-center">
@@ -128,9 +127,7 @@ const TaskIndexPage = (props) => {
                 <th>In Progress:</th>
               </tr>
             </thead>
-            {/* <tbody> */}
               {inProgressTaskTiles}
-            {/* </tbody> */}
           </table>
         </div>
         <div className="cell medium-4 text-center">
@@ -140,9 +137,7 @@ const TaskIndexPage = (props) => {
                 <th>Completed:</th>
               </tr>
             </thead>
-            {/* <tbody> */}
               {completedTaskTiles}
-            {/* </tbody> */}
           </table>
         </div>
       </div>

@@ -45,14 +45,14 @@ const TaskFormContainer = (props) => {
     location.reload();
   };
 
-  let work_checked
-  let health_checked
-  let education_checked
-  let free_time_checked
-  work_checked = (newTask.hashtag_work ==="on" ? "checked" : "")
-  health_checked = (newTask.hashtag_health ==="on" ? "checked" : "")
-  education_checked = (newTask.hashtag_education ==="on" ? "checked" : "")
-  free_time_checked = (newTask.hashtag_free_time ==="on" ? "checked" : "")
+  // let work_checked
+  // let health_checked
+  // let education_checked
+  // let free_time_checked
+  // work_checked = (newTask.hashtag_work ==="on" ? "checked" : "")
+  // health_checked = (newTask.hashtag_health ==="on" ? "checked" : "")
+  // education_checked = (newTask.hashtag_education ==="on" ? "checked" : "")
+  // free_time_checked = (newTask.hashtag_free_time ==="on" ? "checked" : "")
 
   return (
     <form onSubmit={handleSubmit} className="new-task-form callout">
@@ -141,7 +141,7 @@ const TaskFormContainer = (props) => {
               id="hashtag_work" 
               onChange={handleChange} 
               name="hashtag_work"/>
-              <label  for="hashtag_work">
+              <label  htmlFor="hashtag_work">
                 work
               </label>
             <br></br>
@@ -152,7 +152,7 @@ const TaskFormContainer = (props) => {
               id="hashtag_health" 
               onChange={handleChange} 
               name="hashtag_health"/>
-              <label  for="hashtag_health">
+              <label  htmlFor="hashtag_health">
                 health
               </label>
             <br></br>
@@ -163,7 +163,7 @@ const TaskFormContainer = (props) => {
               id="hashtag_education" 
               onChange={handleChange} 
               name="hashtag_education"/>
-              <label  for="hashtag_education">
+              <label  htmlFor="hashtag_education">
                 education
               </label>
             <br></br>
@@ -173,7 +173,7 @@ const TaskFormContainer = (props) => {
               // {free_time_checked}
               id="hashtag_free_time" 
               onChange={handleChange} name="hashtag_free_time"/>
-              <label  for="hashtag_free_time">
+              <label  htmlFor="hashtag_free_time">
                 free time
               </label>
             <br></br>
