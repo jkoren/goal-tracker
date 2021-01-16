@@ -19,20 +19,18 @@ class Api::V1::TasksController < ApplicationController
   
   # POST /tasks
   def create
-     binding.pry #create
+    # binding.pry #create
     revised_params = task_params
 
-    # convert start time from local time to GMT
-    the_time = task_params["task_starts_at"].to_datetime
+    # converting json time to ruby time format
+    # task_start_time should be coming over in UTC (GMT)
+    revised_params["task_starts_at"] = task_params["task_starts_at"].to_datetime
 
-    
     # converting HTML on/off to boolean
     revised_params["hashtag_work"] = (task_params["hashtag_work"] == "on")
     revised_params["hashtag_health"] = (task_params["hashtag_health"] == "on")
     revised_params["hashtag_education"] = (task_params["hashtag_education"] == "on")
     revised_params["hashtag_free_time"] = (task_params["hashtag_free_time"] == "on")
-    # converting json time to ruby time format
-    revised_params["task_starts_at"] = task_params["task_starts_at"].to_datetime
     
     task = Task.new(revised_params)
     task.user = current_user

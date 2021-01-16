@@ -86,7 +86,6 @@ const UpdateTask = (props) => {
     });
   }
   const handleCheckboxChange = event => {
-    debugger
     setUpdatedTask({
       ...updatedTask,
       [event.currentTarget.name]: (event.currentTarget.value === "on")
@@ -95,7 +94,6 @@ const UpdateTask = (props) => {
   
   // convert time to format expected by html datetime-local
   let convertedTaskStartsAt
-  debugger
   convertedTaskStartsAt = updatedTask.task_starts_at.slice(0,16)
 
   let page
