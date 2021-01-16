@@ -9,45 +9,32 @@ class Api::V1::TasksController < ApplicationController
     tasks = tasks.sort_by{ |a| a[:created_at] }.reverse
     render json: tasks, each_serializer: TaskSerializer
   end
-
+  
   # GET /tasks/1
   def show
     tasks = Task.find(params[:id])
     render json: tasks, serializer: TaskSerializer
   end
-
-  def search
-    @term = params[:term].downcase
-    tasks = Task.all
-    selectedTasks = []
-    tasks.each do | task |
-      found = false
-      found = task.title.downcase.include?(@term)
-      if !found
-        task.hashtags.each do | hashtag |
-          if !found
-            found = hashtag.title.downcase.include?(@term)
-          end
-        end
-      end
-      if found
-        selectedTasks << task
-      end
-    end
-    if !selectedTasks.empty?
-      render json: selectedTasks
-    else
-      # what to do if empty
-      render json: ["no match"]
-    end
-  end
-
+  
+  
   # POST /tasks
   def create
-    task = Task.new(task_params)
+    # binding.pry #create
+    revised_params = task_params
+
+    # converting json time to ruby time format
+    # task_start_time should be coming over in UTC (GMT)
+    revised_params["task_starts_at"] = task_params["task_starts_at"].to_datetime
+
+    # converting HTML on/off to boolean
+    revised_params["hashtag_work"] = (task_params["hashtag_work"] == "on")
+    revised_params["hashtag_health"] = (task_params["hashtag_health"] == "on")
+    revised_params["hashtag_education"] = (task_params["hashtag_education"] == "on")
+    revised_params["hashtag_free_time"] = (task_params["hashtag_free_time"] == "on")
+    
+    task = Task.new(revised_params)
     task.user = current_user
-    @time_int = task_params["task_starts_at"]
-    task.task_starts_at = @time_int.to_datetime
+    
     if task.save
       flash[:notice] = 'Task was successfully created.'
       render json: task
@@ -59,7 +46,7 @@ class Api::V1::TasksController < ApplicationController
       # https://www.thegreatcodeadventure.com/rails-api-painless-error-handling-and-rendering-2/
     end
   end
-
+  
   # PATCH/PUT /tasks/1
   def update
     task = Task.find_by(id: params[:id])
@@ -73,14 +60,15 @@ class Api::V1::TasksController < ApplicationController
     end
     revised_params = task_params
     revised_params["status"] = task_num
- 
+    
+    
     if task.update(revised_params)
       render json: {status: "updated successfully"}
     else
       render json: {error: "update failed"}
     end
   end
-
+  
   # DELETE /tasks/1
   def destroy
     task = Task.find(params[:id])
@@ -88,7 +76,33 @@ class Api::V1::TasksController < ApplicationController
       render json: {destroyed: true}
     end   
   end
+  
+end
 
+def search
+  @term = params[:term].downcase
+  tasks = Task.all
+  selectedTasks = []
+  tasks.each do | task |
+    found = false
+    found = task.title.downcase.include?(@term)
+    if !found
+      task.hashtags.each do | hashtag |
+        if !found
+          found = hashtag.title.downcase.include?(@term)
+        end
+      end
+    end
+    if found
+      selectedTasks << task
+    end
+  end
+  if !selectedTasks.empty?
+    render json: selectedTasks
+  else
+    # what to do if empty
+    render json: ["no match"]
+  end
 end
 
 def authorize_user
@@ -108,5 +122,5 @@ private
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:id, :title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :search)
+      params.require(:task).permit(:id, :title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :hashtag_work, :hashtag_health, :hashtag_education, :hashtag_free_time, :search)
     end

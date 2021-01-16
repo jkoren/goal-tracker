@@ -4,12 +4,51 @@ import { Link } from 'react-router-dom'
 const TaskTile = (props) =>{
   let textColor = "white"
 
+// this needs to be fixed and put in one for each hashtag 
+let color = "white"
+let backgroundColor
 
-
-  let tileStyle
-  if (props.data.status == 1)  {tileStyle = "to-do"}
-  else if (props.data.status == 2) {tileStyle = "in-progress"}
-  else {tileStyle = "completed"}
+backgroundColor = "purple"
+let the_work_div
+let work_div = 
+  <div className="text-center"     
+    style={{backgroundColor:backgroundColor}}>
+    <div style={{color:color}}>  
+              work</div>
+  </div>
+  the_work_div = (props.data.hashtag_work ? work_div : <></>)
+  
+  backgroundColor = "green"
+  let the_health_div
+  let health_div = 
+  <div className="text-center"     
+  style={{backgroundColor:backgroundColor}}>
+      <div style={{color:color}}>  
+        health
+      </div>
+    </div>
+  the_health_div = (props.data.hashtag_health ? health_div : <></>)
+  
+  backgroundColor = "red"
+  let the_education_div
+  let education_div = 
+  <div className="text-center"     
+  style={{backgroundColor:backgroundColor}}>
+    <div style={{color:color}}>  
+              education</div>
+  </div>
+  the_education_div = (props.data.hashtag_education ? education_div : <></>)
+  
+    
+  backgroundColor = "blue"
+  let the_free_time_div
+  let free_time_div = 
+    <div className="text-center"     
+      style={{backgroundColor:backgroundColor}}>
+      <div style={{color:color}}>  
+                free_time</div>
+    </div>
+    the_free_time_div = (props.data.hashtag_free_time ? free_time_div : <></>)
 
   let stopwatchTile
   if (props.data.status == "In Progress") { 
@@ -19,6 +58,7 @@ const TaskTile = (props) =>{
     stopwatchTile = (<br></br>)
   }
 
+  // this is set up in case want to move hashtags to separate table in future.  this will allow users to create their own hashtags and choose the color.
   const hashtagTiles = props.data.hashtags.map((hashtag) => {
     return (
       <h6 className="text-center" style={{ backgroundColor: hashtag.color }}>
@@ -30,11 +70,31 @@ const TaskTile = (props) =>{
     // https://stackoverflow.com/questions/64256897/how-to-change-the-color-of-the-text-dynamically-in-react
   })
   let now = new Date()
-  let started = Date.parse(props.data.task_starts_at)
-  let diffTime = Math.abs(now - started);
-  let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  let diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
-  // https://stackoverflow.com/questions/3224834/get-difference-between-2-dates-in-javascript
+  let started = new Date(props.data.task_starts_at)
+  let diffTime = now - started
+  let diffHours = Math.ceil(diffTime / (1000 * 60 * 60))
+  let diffDays = Math.floor(diffHours / 24)
+
+  // format start date for tile
+  var year = started.getFullYear();
+  var month = started.getMonth() + 1;
+  var day = started.getDate();
+  var hours = started.getHours();
+  var minutes = started.getMinutes();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+  let formattedStart = month + '/' + day + '/' + year + "  " + hours + ":" + minutes
+
+  let elapsedDiv
+  if (diffTime < 0) {
+    elapsedDiv = (<div> To be started: {formattedStart} </div>)
+  } else {
+    elapsedDiv = (<div> Elapsed: {diffDays} days ({diffHours} hrs) </div>)
+  }
 
   return(
     <div className="cell callout box-shadow hover-zoom">
@@ -45,8 +105,7 @@ const TaskTile = (props) =>{
         </Link>
         <div className="grid-x">
           <div className="cell medium-6">
-            {/* {props.data.status} */}
-            Elapsed: {diffDays} days ({diffHours} hrs)
+            {elapsedDiv}
           </div>
           <div className="cell medium-6">
             Effort: {props.data.time_worked} mins
@@ -54,15 +113,15 @@ const TaskTile = (props) =>{
           <div className="cell">
             {stopwatchTile}
           </div>
-
-          <div>
-          
-        </div>
         </div>
         <div className = "grid-x">
-          <p className = "medium-4">
-            {hashtagTiles}
-          </p>
+          <div className = "medium-4">
+            {/* {hashtagTiles} */}
+            {the_work_div}
+            {the_health_div}
+            {the_education_div}
+            {the_free_time_div}
+          </div>
         </div>
         <Link to={`tasks/${props.data.id}/edit`}>
           <i class="far fa-edit fa-1x"></i>
@@ -74,6 +133,5 @@ const TaskTile = (props) =>{
     </div>
   )
 }
-
 
 export default TaskTile

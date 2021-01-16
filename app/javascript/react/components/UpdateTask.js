@@ -9,7 +9,11 @@ const UpdateTask = (props) => {
     timer_starts_at: "",
     time_worked: "",
     status: "",
-    hashtags: ""
+    hashtags: [],
+    hashtag_work: "",
+    hashtag_health: "", 
+    hashtag_education: "", 
+    hashtag_free_time: "",
   };
 
   const [updatedTask, setUpdatedTask] = useState(defaultFields)
@@ -76,15 +80,19 @@ const UpdateTask = (props) => {
   }
 
   const handleStatusChange = event => {
-    
     setUpdatedTask({
       ...updatedTask,
       status: event.currentTarget.value
     });
   }
-
-
+  const handleCheckboxChange = event => {
+    setUpdatedTask({
+      ...updatedTask,
+      [event.currentTarget.name]: (event.currentTarget.value === "on")
+    });
+  }
   
+  // convert time to format expected by html datetime-local
   let convertedTaskStartsAt
   convertedTaskStartsAt = updatedTask.task_starts_at.slice(0,16)
 
@@ -172,21 +180,61 @@ const UpdateTask = (props) => {
           <label>
             Hashtags:
             <br></br>
-            <input type="checkbox" id="hashtag1" name="hashtag1" value="work"/>
-            <label htmlFor="hashtag1">work</label><br></br>
-            <input type="checkbox" id="hashtag2" name="hashtag2" value="health"/>
-            <label htmlFor="hashtag2">health</label><br></br>
-            <input type="checkbox" id="hashtag3" name="hashtag3" value="education"/>
-            <label htmlFor="hashtag3">education</label><br></br>
-            <input type="checkbox" id="hashtag4" name="hashtag4" value="free time"/>
-            <label htmlFor="hashtag4">free time</label><br></br>
+    
+            <input
+              type="checkbox"
+              checked={updatedTask.hashtag_work}
+              id="hashtag_work"
+              onChange={handleCheckboxChange}
+              name="hashtag_work"
+            />
+            <label htmlFor="hashtag_work">
+              work
+              </label>
+            <br></br>
+
+            <input
+              type="checkbox"
+              checked={updatedTask.hashtag_health}
+              id="hashtag_health"
+              onChange={handleCheckboxChange}
+              name="hashtag_health" />
+            <label htmlFor="hashtag_health">
+              health
+              </label>
+            <br></br>
+
+            <input
+              type="checkbox"
+              checked={updatedTask.hashtag_education}
+              id="hashtag_education"
+              onChange={handleCheckboxChange}
+              name="hashtag_education" />
+            <label htmlFor="hashtag_education">
+              education
+              </label>
+            <br></br>
+
+            <input
+              type="checkbox"
+              checked={updatedTask.hashtag_free_time}
+              id="hashtag_free_time"
+              onChange={handleCheckboxChange}
+              name="hashtag_free_time" />
+            <label htmlFor="hashtag_free_time">
+              free time
+              </label>
+            <br></br>
+
           </label>
           <div className="grid-x grid-margin-x align-center">
+           
             <input
               className="button cell shrink"
               type="submit"
               value="Save Task"
             />
+           
             <button
               className="button cell shrink"
               type="button"
