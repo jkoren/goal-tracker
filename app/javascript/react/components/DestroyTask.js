@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Redirect } from "react-router-dom"
 
 const DestroyTask = (props) => {
-  debugger
   const [currentTask, setCurrentTask] = useState({})
   const [shouldRedirect, setShouldRedirect] = useState(false)
 

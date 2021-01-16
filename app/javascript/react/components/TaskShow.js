@@ -8,8 +8,9 @@ const TaskShow = (props) => {
       task_starts_at:"",
       time_worked:"",
       timer_starts_at:"",
-      title:""
-
+      title:"",
+      hashtag_work: "off", 
+      hashtag_health: "off", hashtag_education: "off", hashtag_free_time: "off",
     })
 
     const id = props.match.params.id 
@@ -32,9 +33,9 @@ const TaskShow = (props) => {
           .catch(error => console.error(`Error in fetch: ${error.message}`))
         }, [])
         
-      
+   
+        
   var date = new Date(task.task_starts_at);
-
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
   var day = date.getDate();
@@ -53,20 +54,21 @@ const TaskShow = (props) => {
   let diffTime = Math.abs(now - started);
   let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   let diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+
+
   return(
     <>
-
-    <div className="grid-x grid-margin-x">
-      <div className="medium-offset-1 medium-6">
-        <h4>Goal: {task.title}</h4>
-        <h5>{task.body}</h5>
-        <h5>Status: {task.status}</h5>
-        <h5>Task start time: {formattedDate}</h5>
-        <h5>Days since start: {diffDays} ({diffHours} hours)</h5>
-        <h5>Minutes worked: {task.time_worked}</h5>
+      <div className="grid-x grid-margin-x">
+        <div className="medium-offset-1 medium-6">
+          <h4>Goal: {task.title}</h4>
+          <h5>{task.body}</h5>
+          <h5>Status: {task.status}</h5>
+          <h5>Task start time: {formattedDate}</h5>
+          <h5>Days since start: {diffDays} ({diffHours} hours)</h5>
+          <h5>Minutes worked: {task.time_worked}</h5>
+        </div>
       </div>
-    </div>
-  </>
+    </>
   )
 }
 

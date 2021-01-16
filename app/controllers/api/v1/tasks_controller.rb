@@ -44,10 +44,21 @@ class Api::V1::TasksController < ApplicationController
 
   # POST /tasks
   def create
-    task = Task.new(task_params)
+    # binding.pry #create
+    revised_params = task_params
+    # revised_params["status"] = task_num
+
+    # converting HTML on/off to boolean
+    revised_params["hashtag_work"] = (task_params["hashtag_work"] == "on")
+    revised_params["hashtag_health"] = (task_params["hashtag_health"] == "on")
+    revised_params["hashtag_education"] = (task_params["hashtag_education"] == "on")
+    revised_params["hashtag_free_time"] = (task_params["hashtag_free_time"] == "on")
+    # converting json time to ruby time format
+    revised_params["task_starts_at"] = task_params["task_starts_at"].to_datetime
+    
+    task = Task.new(revised_params)
     task.user = current_user
-    @time_int = task_params["task_starts_at"]
-    task.task_starts_at = @time_int.to_datetime
+    
     if task.save
       flash[:notice] = 'Task was successfully created.'
       render json: task
@@ -71,8 +82,19 @@ class Api::V1::TasksController < ApplicationController
     else
       task_num = 3
     end
+
+    # binding.pry #edit
+    # work_hash = task_params["hashtag_work"] == "on"
+    # health_hash = task_params["hashtag_health"] == "on"
+    # education_hash = task_params["hashtag_education"] == "on"
+    # free_time_hash = task_params["hashtag_free_time"] == "on"
+
     revised_params = task_params
     revised_params["status"] = task_num
+    # revised_params["hashtag_work"] = work_hash
+    # revised_params["hashtag_health"] = health_hash
+    # revised_params["hashtag_education"] = education_hash
+    # revised_params["hashtag_free_time"] = free_time_hash
  
     if task.update(revised_params)
       render json: {status: "updated successfully"}
@@ -108,5 +130,5 @@ private
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:id, :title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :search)
+      params.require(:task).permit(:id, :title, :body, :task_starts_at, :timer_starts_at, :time_worked, :status, :hashtag_work, :hashtag_health, :hashtag_education, :hashtag_free_time, :search)
     end

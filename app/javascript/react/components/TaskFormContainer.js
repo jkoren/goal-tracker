@@ -7,11 +7,14 @@ const TaskFormContainer = (props) => {
     task_starts_at: Date.now(),
     timer_starts_at: Date.now(),
     time_worked: 0,
+    hashtag_work: "off", 
+    hashtag_health: "off", hashtag_education: "off",hashtag_free_time: "off",
     status: 1,
     hashtags: []
   });
   
   const handleChange = event => {
+    // debugger
     setNewTask({
       ...newTask,
       [event.currentTarget.name]: event.currentTarget.value
@@ -34,11 +37,22 @@ const TaskFormContainer = (props) => {
       task_starts_at: Date.now(),
       timer_starts_at: Date.now(),
       time_worked: 0,
+      hashtag_work: "off", 
+      hashtag_health: "off", hashtag_education: "off", hashtag_free_time: "off",
       status: 1,
       hashtags: []
     });
     location.reload();
   };
+
+  let work_checked
+  let health_checked
+  let education_checked
+  let free_time_checked
+  work_checked = (newTask.hashtag_work ==="on" ? "checked" : "")
+  health_checked = (newTask.hashtag_health ==="on" ? "checked" : "")
+  education_checked = (newTask.hashtag_education ==="on" ? "checked" : "")
+  free_time_checked = (newTask.hashtag_free_time ==="on" ? "checked" : "")
 
   return (
     <form onSubmit={handleSubmit} className="new-task-form callout">
@@ -121,16 +135,49 @@ const TaskFormContainer = (props) => {
           <label>
             Hashtags:
             <br></br>
-            <input type="checkbox" id="hashtag1" name="hashtag1" value="work"/>
-            <label for="hashtag1">work</label><br></br>
-            <input type="checkbox" id="hashtag2" name="hashtag2" value="health"/>
-            <label for="hashtag2">health</label><br></br>
-            <input type="checkbox" id="hashtag3" name="hashtag3" value="education"/>
-            <label for="hashtag3">education</label><br></br>
-            <input type="checkbox" id="hashtag4" name="hashtag4" value="free time"/>
-            <label for="hashtag4">free time</label><br></br>
+            <input 
+              type="checkbox"
+              // {work_checked}
+              id="hashtag_work" 
+              onChange={handleChange} 
+              name="hashtag_work"/>
+              <label  for="hashtag_work">
+                work
+              </label>
+            <br></br>
+            
+            <input 
+              type="checkbox"
+              // {health_checked}
+              id="hashtag_health" 
+              onChange={handleChange} 
+              name="hashtag_health"/>
+              <label  for="hashtag_health">
+                health
+              </label>
+            <br></br>
+            
+            <input 
+              type="checkbox"
+              // {education_checked}
+              id="hashtag_education" 
+              onChange={handleChange} 
+              name="hashtag_education"/>
+              <label  for="hashtag_education">
+                education
+              </label>
+            <br></br>
+            
+            <input 
+              type="checkbox"
+              // {free_time_checked}
+              id="hashtag_free_time" 
+              onChange={handleChange} name="hashtag_free_time"/>
+              <label  for="hashtag_free_time">
+                free time
+              </label>
+            <br></br>
           </label>
-
         </div>
       </div>
       
