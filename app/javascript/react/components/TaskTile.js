@@ -70,7 +70,8 @@ let work_div =
     // https://stackoverflow.com/questions/64256897/how-to-change-the-color-of-the-text-dynamically-in-react
   })
   let now = new Date()
-  let started = new Date(props.data.task_starts_at)
+  // take off final "z" - this is not UTC time - this time is local to the user
+  let started = new Date(props.data.task_starts_at.slice(0, 23))
   let diffTime = now - started
   let diffHours = Math.ceil(diffTime / (1000 * 60 * 60))
   let diffDays = Math.floor(diffHours / 24)
@@ -86,6 +87,12 @@ let work_div =
   }
   if (month < 10) {
     month = '0' + month;
+  }
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes;
   }
   let formattedStart = month + '/' + day + '/' + year + "  " + hours + ":" + minutes
 
